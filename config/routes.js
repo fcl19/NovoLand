@@ -22,6 +22,7 @@ module.exports.routes = {
   '/sarasota': {view: 'pages/sarasota'},
   '/leaderboard': {view: 'pages/leaderboard'},
   '/profile': {view: 'pages/profile'},
+ 
   
   
 
