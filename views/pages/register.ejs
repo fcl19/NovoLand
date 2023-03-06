@@ -1,0 +1,113 @@
+<style>
+  .registerContainer {
+      margin: auto;
+      width: 50%;
+      padding: 10px;
+  }
+  input {
+      margin-left: 20px;
+      width: 35%;
+  }
+  label {
+    display: inline-block;
+    width: 150px;
+  }
+  #register {
+    margin-left: 42%;
+  }
+</style>
+
+<h1>NuPath</h1><br/><br/><br/>
+<div class="registerContainer">
+    <h2>Register for NuPath</h2><br/>
+    <form id="registerForm">
+    <label for="firstName">
+        First Name
+    </label>
+    <input name="firstName" id="firstName" placeholder="First Name" required>
+    <br/><br/>
+    <label for="lastName">
+        Last Name
+    </label>
+    <input name="lastName" id="lastName" placeholder="Last Name" required>
+    <br/><br/>
+    <label for="email">
+        Email
+    </label>
+    <input name="email" id="email" placeholder="Email" required>
+    <br/><br/>
+    <label for="username">
+        Username
+    </label>
+    <input name="username" id="username" placeholder="Username" required>
+    <br/><br/>
+    <label for="password">
+        Password
+    </label>
+    <input type="password" name="password" id="password" placeholder="Password" required>
+    <br/><br/>
+    <label for="confirmPassword">
+      Confirm Password
+    </label>
+    <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" required>
+    <br/><br/>
+    <button id="cancel">Cancel</button>
+    <button type="submit" id="register">Register</button>
+    </form>
+</div>
+
+<script>
+
+function initPage() {
+  $("#cancel").on("click", () => {
+    window.location.href = "/";
+  });
+  $("#registerForm").on("submit", async (e) => {
+    e.preventDefault();
+    let firstName = $("#firstName").val();
+    let lastName = $("#lastName").val();
+    let email = $("#email").val();
+    let username = $("#username").val();
+    let password = $("#password").val();
+    let confirmPassword = $("#confirmPassword").val();
+    if (password !== confirmPassword) {
+      Swal.fire({
+        icon: 'error',
+        text: "Passwords do not match"
+      })
+    } else {
+      $.ajax({
+        type: 'GET',
+        url: "/user/register",
+        dataType: 'json',
+        contentType: 'json',
+        async: false,
+        data: {firstName: firstName, lastName: lastName, email: email, username: username, password: password},
+        success: (data) => {
+          if (data.error) {
+            Swal.fire({
+              icon: 'error',
+              text: data.error
+            })
+          } else {
+            window.location.href = "/";
+          }
+        },
+        error: async (err) => {
+          Swal.fire({
+            icon: 'error',
+            text: "An error occurred"
+          })
+        }
+      });
+    }
+    return false;
+  });
+}
+
+$(document).ready(() => {
+  initPage();
+});
+</script>
+
+

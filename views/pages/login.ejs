@@ -1,0 +1,113 @@
+<style>
+    .loginContainer {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+    }
+    #username {
+        margin-left: 20px;
+        width: 35%;
+    }
+    #password {
+        margin-left: 25px;
+        width: 35%;
+    }
+    #login {
+        margin-left: 50%;
+    }
+    #register {
+        margin-left: 37%;
+    }
+</style>
+
+<h1>NuPath</h1><br/><br/><br/>
+<div class="loginContainer">
+    <h2>Log In to NuPath</h2><br/>
+    <label for="username">Username</label>
+    <input name="username" id="username" placeholder="Username">
+    <br/><br/>
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" placeholder="Password">
+    <br/><br/>
+    <button id="login">Login</button>
+    <br/>
+    <br/>
+    <button id="register">Create Account</button>
+</div>
+<button id="bypass">Click me to bypass login</button>
+<div id="developerSettings" data-devmode="<%=sails.config.custom.devMode%>"></div>
+
+<script>
+if ($("#developerSettings").data("devmode")) {
+    $("#bypass").show();
+    $("#bypass").on("click", () => {
+        let devmode = $("#developerSettings").data("devmode");
+        if (devmode) {
+            $.ajax({
+                type: 'GET', 
+                url: "/user/login",
+                dataType: 'json',
+                contentType: 'json',
+                data: {username: "admin", password: "admin"},
+                async: false,
+                success: (data) => {
+                    if (data.error) {
+                      Swal.fire({
+                        icon: 'error',
+                        text: data.error
+                      })
+                    } else {
+                      window.location.href = "/";
+                    }
+                },
+                error: (err) => {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Something went wrong!'
+                  })
+                }
+            });
+        }
+    });
+} else {
+    $("#bypass").hide();
+}
+$(document).ready(() => {
+    $("#login").on("click", () => {
+        let username = $("#username").val();
+        let password = $("#password").val();
+        $.ajax({
+            type: 'GET', 
+            url: "/user/login",
+            dataType: 'json',
+            contentType: 'json',
+            data: {username: username, password: password},
+            async: false,
+            success: (data) => {
+                console.log(data);
+                if (data.error) {
+                  Swal.fire({
+                    icon: 'error',
+                    text: data.error
+                  })
+                } else {
+                  window.location.href = "/";
+                }
+            },
+            error: (err) => {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Something went wrong!'
+              })
+            }
+        });
+    });
+    $("#register").on("click", () => {
+        window.location.href = "/register";
+    });
+});
+</script>
+
+

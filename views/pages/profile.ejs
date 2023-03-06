@@ -33,3 +33,166 @@
         </ul>
       </div>  
   </nav>
+<div id="accountInfo" data-account="<%=account%>"></div>
+<br/>
+<h2 id="profileHeader">Account Information</h2>
+<div class="accountContainer">
+  <br/>
+  <label for="username"><b>Username:</b></label>
+  <div id="username" name="username" class="userInfo"></div>
+  <br/>
+  <label for="firstName"><b>First Name:</b></label>
+  <div id="firstName" name="firstName" class="userInfo"></div>
+  <br/>
+  <label for="lastName"><b>Last Name:</b></label>
+  <div id="lastName" name="lastName" class="userInfo"></div>
+  <br/>
+  <label for="email"><b>Email:</b></label>
+  <div id="email" name="email" class="userInfo"></div>
+  <br/>
+  <label for="interests"><b>Interests:</b></label>
+  <div id="interests" name="interests" class="userInfo"></div>
+  <br/>
+  <div id="tasksCompletedList">
+  </div>
+  <br/><br/><br/>
+  <div class="selfEditButtons"><button id="logout">Logout</button><button id="editAccountValues" class="editButton">Edit Account</button></div>
+  <button id="saveAccountValues" class="editButton">Save Changes</button>
+</div>
+
+<script>
+  function initPage() {
+    $("#saveAccountValues").hide();
+    let account = $("#accountInfo").data("account");
+    //account.tasksCompleted = ["task1", "task2", "task3"];
+    if (account.isSelfEdit) {
+      $("#profileHeader").text("My Profile");
+      $("#editAccountValues").click(function() {
+        $("#firstName").html(`<input type="text" id="firstNameInput" name="firstNameInput" value="${account.firstName}">`);
+        $("#lastName").html(`<input type="text" id="lastNameInput" name="lastNameInput" value="${account.lastName}">`);
+        $("#email").html(`<input type="text" id="emailInput" name="emailInput" value="${account.email}">`);
+        $("#interests").html(`<input type="text" id="interestsInput" name="interestsInput" value="${account.interests}">`);
+        $("#editAccountValues").hide();
+        $("#saveAccountValues").show();
+      });
+      $("#saveAccountValues").click(function() {
+        let firstName = $("#firstNameInput").val();
+        let lastName = $("#lastNameInput").val();
+        let email = $("#emailInput").val();
+        let interests = $("#interestsInput").val();
+        $.ajax({
+          url: "/user/edit",
+          type: "GET",
+          data: {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            interests: interests
+          },
+          success: function(data) {
+            if (data.success) {
+              $("#firstName").text(firstName);
+              $("#lastName").text(lastName);
+              $("#email").text(email);
+              $("#interests").text(interests);
+              $("#editAccountValues").show();
+              $("#saveAccountValues").hide();
+            } else {
+              Swal.fire({
+                title: "Error",
+                text: data.error,
+                icon: "error",
+                confirmButtonText: "Ok"
+              })
+            }
+          },
+          error: function(err) {
+            console.log(err);
+            Swal.fire({
+              title: "Error",
+              text: "An error occurred while trying to save your changes.",
+              icon: "error",
+              confirmButtonText: "Ok"
+            })
+          }
+        });
+      });
+      $("#logout").click(function() {
+        $.ajax({
+          url: "/user/logout",
+          type: "GET",
+          success: function(data) {
+            if (data.success) {
+              window.location.href = "/";
+            } else {
+              Swal.fire({
+                title: "Error",
+                text: data.error,
+                icon: "error",
+                confirmButtonText: "Ok"
+              })
+            }
+          },
+          error: function(err) {
+            console.log(err);
+            Swal.fire({
+              title: "Error",
+              text: "An error occurred while trying to logout.",
+              icon: "error",
+              confirmButtonText: "Ok"
+            })
+          }
+        });
+      });
+    } else {
+      $("#profileHeader").text(`${account.firstName} ${account.lastName}'s Profile`);
+      $(".selfEditButtons").hide();
+    }
+    $("#username").text(account.username);
+    $("#firstName").text(account.firstName);
+    $("#lastName").text(account.lastName);
+    $("#email").text(account.email);
+    $("#interests").text(account.interests);
+    for (let task = 0; task < account.tasksCompleted.length; task += 1) {
+      $("#tasksCompletedList").append(`<label id='tasksCompletedTitle'>${task === 0 ? "<b>Tasks Completed:</b>" : ""}</label>`);
+      $("#tasksCompletedList").append(`<div id='tasksCompleted' name='tasksCompleted' class='userInfo'>${account.tasksCompleted[task]}</div>`);
+      $("#tasksCompletedList").append("<br/>");
+    }  
+  }
+  initPage();
+</script>
+
+<style>
+  #profileHeader {
+    margin: auto;
+    width: 70%;
+    padding: 10px;
+  }
+  .accountContainer {
+    margin: auto;
+    width: 60%;
+    padding: 10px;
+  }
+  .userInfo {
+    display: inline-block;
+    margin-left: 20px;
+  }
+  label {
+    width: 160px;
+    text-align: right;
+  }
+  #username {
+    margin-left: 20px;
+    width: 35%;
+  }
+  #tasksCompletedTitle {
+    width: 160px;
+    text-align: right;
+  }
+  .selfEditButtons {
+    display: inline-block;
+  }
+  .editButton {
+    margin-left: 400px;
+  }
+</style>
