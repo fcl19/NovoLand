@@ -28,8 +28,8 @@ module.exports = {
     }
   },
   fn: async function(inputs, exits) {
-    const bcrypt = require('bcrypt');
-    const passwordsMatch = await bcrypt.compare(inputs.password, inputs.hashedPassword);
-    return exits.success(passwordsMatch);
+    const bcrypt = require('bcrypt'); // Require bcrypt
+    const passwordsMatch = await bcrypt.compare(inputs.password, inputs.hashedPassword); // Compare passwords
+    return exits.success(passwordsMatch); // Return whether passwords match
   }
 };

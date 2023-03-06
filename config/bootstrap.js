@@ -10,14 +10,14 @@
  */
 
 module.exports.bootstrap = async function(done) {
-  // Set up administrators when there is no users
+  // Set up administrators when there is no users and devMode is true
   if ((await Users.count()) === 0 && sails.config.custom.devMode) {
     await Users.create({
       firstName: 'Admin',
       lastName: 'User',
       email: 'admin@admin.com',
       username: 'admin',
-      password: await sails.helpers.passwords.hashPassword('admin'),
+      password: await sails.helpers.passwords.hashPassword('admin'), // Hash password
     });
   }
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.

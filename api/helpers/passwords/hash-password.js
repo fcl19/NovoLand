@@ -21,10 +21,10 @@ module.exports = {
     }
   },
   fn: async function(inputs, exits) {
-    const bcrypt = require('bcrypt');
-    const saltRounds = 10;
-    const salt = await bcrypt.genSalt(saltRounds);
-    const hash = await bcrypt.hash(inputs.password, salt);
-    return exits.success(hash);
+    const bcrypt = require('bcrypt'); // Require bcrypt
+    const saltRounds = 10; // Salt rounds
+    const salt = await bcrypt.genSalt(saltRounds); // Generate salt
+    const hash = await bcrypt.hash(inputs.password, salt); // Hash password
+    return exits.success(hash); // Return hashed password
   }
 };

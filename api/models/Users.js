@@ -6,27 +6,27 @@
 
 module.exports = {
   attributes: {
-    firstName: {
+    firstName: { // First name
       type: 'string',
       required: true,
     },
-    lastName: {
+    lastName: { // Last name
       type: 'string',
       required: true,
     },
-    email: {
+    email: { // Email
       type: 'string',
       required: true,
     },
-    username: {
+    username: { // Username
       type: 'string',
       required: true,
     },
-    password: {
+    password: { // Password
       type: 'string',
       required: true,
     },
-    interests: {
+    interests: { // Interests
       type: 'string',
       defaultsTo: '',
     },
