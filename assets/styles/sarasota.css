@@ -1,0 +1,44 @@
+#srq_head{
+    padding-top: 20px;
+    padding-left: 20px;
+    margin: auto;
+}
+
+.resturants, .grocery, .fun, .transport{
+    padding: 5%;
+    display: block;
+}
+
+#resturants_head, #grocery_head, #fun_head, #transport_head{
+    display: block;
+    padding: 20px;
+    text-align: center;
+    
+}
+
+
+.mamag, .shelf, .walg, .wf, .pub, .lido, .er, .golf{
+    padding: 20px;
+    float: left;
+    width: 90%;
+}
+.mamag_text, .shelf_text, .walg_text, .wf_text, .pub_text, .lido_text, .er_text, .golf_text{
+    float: left;
+    width: 50%;
+    text-align: center;
+}
+
+#mamag_head, #shelf_head, #walg_head, #wf_head, #pub_head, #lido_head, #er_head, #golf_head{
+    display: block;
+    padding-top: 15px;
+}
+
+#mamag_p, #shelf_p, #walg_p, #wf_p, #pub_p, #lido_p, #er_p, #golf_p{
+    display: block;
+}
+
+
+#mamag_map, #shelf_map, #walg_map, #wf_map, #pub_map, #lido_map, #er_map, #golf_map{
+    float: right;
+    padding:15px;
+}

@@ -23,6 +23,9 @@ module.exports = {
     profile:function(req, res){
         res.view('profile');
     },
+    new_post:function(req, res){
+        res.view('new_post');
+    },
 
 
 };

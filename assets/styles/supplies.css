@@ -1,0 +1,147 @@
+#sup_Header{
+    padding: 20px;
+}
+
+.accordian{
+    padding: 15px;
+}
+
+.where_to_shop{
+    padding: 20px;
+}
+
+.online{
+    padding: 10px;
+}
+
+.in_town{
+    padding: 10px;
+}
+
+.welcome{
+    padding: 10px;
+}
+
+
+.fvt, .utc, .bbb, .wal{
+    padding: 20px;
+    float: left;
+    width: 90%;
+}
+.fvt_text, .utc_text, .bbb_text, .wal_text{
+    float: left;
+    width: 50%;
+}
+
+#fvt_head, #utc_head, #bbb_head, #wal_head{
+    display: block;
+    padding-top: 15px;
+}
+#fvt_p, #utc_p, #bbb_p, #wal_p{
+    display: block;
+}
+
+
+#fvt_map, #utc_map, #bbb_map, #wal_map{
+    float: right;
+    padding:20px;
+}
+
+
+
+
+/*
+.accordian, summary:after, summary:before {
+	box-sizing: border-box;
+}
+
+:root {
+	font-size: 16px;
+}
+
+body {
+	line-height: 1.5;
+	min-height: 100vh;
+	font-size: 1.25rem;
+}
+
+*:focus {
+	outline: none;
+}
+
+body > div {
+	width: 90%;
+	max-width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 5rem;
+	margin-bottom: 5rem;
+}
+
+details div {
+	border-left: 2px solid #000;
+	border-right: 2px solid #000;
+	border-bottom: 2px solid #000;
+	padding: 1.5em;
+}
+/*
+details div > * + * {
+	margin-top: 1.5em;
+}
+
+details + details {
+	margin-top: .5rem;
+}
+
+summary {
+	list-style: none;
+}
+
+summary::-webkit-details-marker {
+	display: none;
+}
+
+summary {
+	border: 2px solid #000;
+	padding: .75em 1em;
+	cursor: pointer;
+	position: relative;
+	padding-left: calc(1.75rem + .75rem + .75rem);
+}
+
+summary:before {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	left: .75rem;
+	content: "↓";
+	width: 1.75rem;
+	height: 1.75rem;
+	background-color: #000;
+	color: #FFF;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	flex-shrink: 0;
+}
+
+details[open] summary {
+	background-color: #eee;
+}
+
+details[open] summary:before {
+	content: "↑";
+}
+
+summary:hover {
+	background-color: #eee;
+}
+
+
+
+code {
+	font-family: monospace;
+	font-weight: 600;
+}
+
+*/

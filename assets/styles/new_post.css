@@ -1,0 +1,27 @@
+#new_post_head{
+    padding-top: 20px;
+    padding-bottom: 20px;;
+    padding-left: 12.5%;
+}
+
+
+#post_form{
+    margin: auto;
+}
+
+#post_input{
+    margin: auto;
+    width: 75%;
+    padding: 20px;
+    display: block;
+}
+
+
+
+#submit{
+    padding: 10px;
+    float: right;
+    display: block;
+    margin-right: 12.5%;
+    margin-top: 10px;
+}
