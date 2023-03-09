@@ -1,0 +1,27 @@
+#catPic1, #catPic2, #catPic3, #catPic4, #catPic5, #catPic6{
+	border-radius: 50%;
+}
+
+#profileIcon{
+    border: 3px solid #000000;
+    border-radius: 50%;
+}
+
+#catPic1:hover, #catPic2:hover, #catPic3:hover, #catPic4:hover, #catPic5:hover, #catPic6:hover{
+    cursor: pointer;
+    box-shadow: 1px 2px 3px rgb(255, 0, 0);
+}
+
+div.catPicsContainer{
+    width: 40%; 
+    height: auto; 
+    float:left; 
+    display: inline-block; 
+    border: 6px solid #487CB4; 
+    padding: 10px; 
+    margin-top: 1%;
+}
+
+div.catPics{
+    margin: 10px;
+}
