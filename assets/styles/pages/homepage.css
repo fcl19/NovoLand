@@ -1,0 +1,32 @@
+/*homeStyles.css*/
+
+*{
+	margin: 0;
+	padding: 0;
+}
+
+header{
+	background-color: #23488D;
+	display: flex;
+	align-items: center;
+	padding: .5%;
+	position: sticky;
+	top: 0;
+	z-index: 2;
+}
+
+header a, header p{
+	font-size:  20px;
+	text-align: center;
+	text-decoration: none;
+	color: white;
+}
+
+h2{
+	color: #23488D;
+}
+
+.create:hover{
+    cursor: pointer;
+    box-shadow: 1px 2px 3px rgba(0,0,0,0.3);
+}

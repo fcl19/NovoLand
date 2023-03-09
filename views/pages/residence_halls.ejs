@@ -34,42 +34,186 @@
       </div>  
   </nav>
 
-<button id="taskComplete">Click me to finish a task</button>
-<button id="taskComplete2">Click me to finish a task</button>
+  <head>
+		<meta charset="utf-8">
+		<meta name="author" content="Sami Cemek">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title style="font-family: Garamond, serif"> Residence Halls </title>
+	</head>
 
-<script>
-    $("#taskComplete").on("click", function() {
-        $.ajax({
-            url: "/tasks/complete",
-            type: "GET",
-            data: {
-              code: "T1"
-            },
-            success: function(data) {
-                Swal.fire({
-                    title: 'Task Completed!',
-                    text: 'You have completed a task!',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
-                })
-            }
-        });
-    });
-    $("#taskComplete2").on("click", function() {
-        $.ajax({
-            url: "/tasks/complete",
-            type: "GET",
-            data: {
-              code: "T2"
-            },
-            success: function(data) {
-                Swal.fire({
-                    title: 'Task Completed!',
-                    text: 'You have completed a task!',
-                    icon: 'success',
-                    confirmButtonText: 'Cool'
-                })
-            }
-        });
-    });
-</script>
+  <body>
+    <!--If the margin property has two values: margin: 25px 50px;
+        top and bottom margins are 25px
+        right and left margins are 50px -->
+    <div style="margin: 40px 150px;">
+        <b><p style="font-size: 60px; text-align: center;"> Residence Halls </p></b>
+
+        <h2> Quick Access</h2>
+        <ul>
+            <li> <a href="#Pei"> I.M. Pei Residence Halls </a></li>
+            <li> <a href="#Dort"> Dort and Goldstein Residence Halls </a></li>
+            <li> <a href="#LetterDorms"> The Letter Dorms </a></li>
+            <li> <a href="#ZDorm"> Z Dorm </a></li>
+            <li> <a href="#Bdorm"> Palmer B Dorm </a></li>
+        </ul>
+    </div>
+
+    <hr id="line2">
+
+    <div style="margin: 60px 150px;" id="Pei">
+        <div>
+            <h2>First Year Student Housing</h2>
+            <h3> I.M. Pei Residence Halls </h3>
+            <p>
+                Most first-year students are required to live in the Pei Residential Complex. These three buildings, 
+                which were designed by the internationally renowned architect I.M. Pei and formally named Bob Johnson Hall, 
+                Peggy Bates Hall, and Elaine & Harvey Rothenberg Hall, are often referred to as Pei 1st Court, 2nd Court, 
+                and 3rd Court.
+            </p>
+            <p>
+                The Pei residence halls accommodate more than 250 students in double and triple occupancy rooms, each with its 
+                own private bathroom. Community kitchen lounges are located in 2nd Court and 3rd Court. A shared laundry room is 
+                located in 2nd Court. The outdoor Palm Court around which the rooms are grouped is a focus of New College student 
+                life. Pei rooms measure approximately 15′ x 15’ and some feature covered porches or large balconies. The buildings 
+                clustered construction, communal spaces and orientation around Palm Court afford residents a strong sense of community.
+            </p>
+            <a href="https://www.ncf.edu/life-at-new/where-to-live/residence-halls/housing-fees/">View Housing Fees</a>
+
+            <p>
+                Pei is home to the Civitas:
+                <a href="https://www.ncf.edu/life-at-new/where-to-live/living-learning-communities/">Living Learning Community</a>
+            </p>
+        </div>
+    </div>
+
+    <div style="display:inline-block; width: 100%; margin-top: 0;">
+  <div class="PeiYoutube" style="width: 50%; height: auto; float: left; display:inline-block;">
+    <iframe width="500" height="300" src="https://www.youtube.com/embed/T_y-qA98WrI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+
+  <div class="PeiMap" style="width: 50%; height: auto; float:left; display: inline-block;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1177.580106190709!2d-82.5560843288549!3d27.383731380084168!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c33fda2aed3793%3A0x77fb8189c525206f!2sNew%20College%20of%20Florida%20Pei%20Residence%20Hall%203rd%20Court!5e1!3m2!1sen!2sus!4v1677873557151!5m2!1sen!2sus" width="450" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+  </div>
+</div>
+
+    <div style="margin: 60px 150px;" id="Dort">
+        <h2>Apartment-Style Residence Halls</h2>
+        <h3> Dort and Goldstein Residence Halls </h3>
+        <p>
+            The Dallas & Elizabeth Dort and Ann & Alfred Goldstein Residence Halls provide accommodations for approximately 150 students 
+            in apartment-style suites, each including its own living room, kitchenette and bathroom facilities. The Dort and Goldstein 
+            Residence Halls are located near the Recreation Center on the Pei Campus. The apartment bedrooms in this area are approximately 
+            12 x 9 and are either three or four bedrooms.
+        </p>
+    </div>
+
+    <div style="display:inline-block; width: 100%; margin-top: 0;">
+  <div class="DortYoutube" style="width: 50%; height: auto; float: left; display:inline-block;">
+    <iframe width="500" height="300" src="https://www.youtube.com/embed/7RYefuH3laI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+
+  <div class="DortMap" style="width: 50%; height: auto; float:left; display: inline-block;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1177.5796254645031!2d-82.55556852853913!3d27.383776535284323!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c33fda46db134b%3A0x92941d0da19169db!2sNew%20College%20of%20Florida%20Goldstein%20Residence%20Hall!5e1!3m2!1sen!2sus!4v1677874443941!5m2!1sen!2sus" width="450" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+</div>
+
+    <div style="margin: 60px 150px;" id="LetterDorms">
+        <h2> Lodge-Style Residence Halls </h2> 
+        <h3> The Letter Dorms: V Residence Hall, W – Peterson, X – Searing, Y Residence Halls, and Z-Dorm (Pritzker Residence Hall) </h3>
+        <p>
+            The Lee & Bob Peterson Residence Hall, Ulla R. Searing Residence Hall, and the V and Y residence halls are lodge-style 
+            structures that feature studio, two- and three-bedroom apartments, each with its own kitchenette and bathroom. The halls 
+            feature a dramatic two-story floor plan with central common areas, timbered ceilings, and a keyless entry system. These 
+            side-by-side residence halls are sometimes called “Letter Dorms” because they were originally designated as V, W, X, and 
+            Y Dorms before two were officially named. The apartment bedroom sizes are approximately 12′ x 9′.
+        </p>
+        <a href="https://www.ncf.edu/life-at-new/where-to-live/residence-halls/housing-fees/">View Housing Fees</a>
+
+        <p>
+            V, W, X and Y dorms are home to the Pride, Health & Wellness, Global Village, Performing Arts:
+            <a href="https://www.ncf.edu/life-at-new/where-to-live/living-learning-communities/">Living Learning Community</a>
+        </p>
+    </div>
+
+    <div style="display:inline-block; width: 100%; margin-top: 0;">
+  <div class="LetterDormsYoutube" style="width: 50%; height: auto; float: left; display:inline-block;">
+    <iframe width="500" height="300" src="https://www.youtube.com/embed/s2z2N1FHKAI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+
+  <div class="LetterDormsMap" style="width: 50%; height: auto; float:left; display: inline-block;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1177.570148181491!2d-82.55552130738332!3d27.38466673403577!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c33fda3e7260b9%3A0xa574571c61a5ae00!2sNew%20College%20of%20Florida%20Y%20Residence%20Hall!5e1!3m2!1sen!2sus!4v1677874757399!5m2!1sen!2sus" width="450" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+</div>
+
+    <div style="margin: 60px 150px;" id="ZDorm">
+        <p>
+            The Rhoda Pritzker Residence Hall, commonly referred to as Z Dorm because of its alphabetical designation in the 
+            original architectural plan, offers urban-style apartment accommodations. Each apartment includes its own eat-in 
+            kitchen, common area, and a suite bathroom. Common spaces include an open-air lounge and amphitheater, as well as 
+            the popular outdoor space known as Z-Green.
+        </p>
+        <a href="https://www.ncf.edu/life-at-new/where-to-live/residence-halls/housing-fees/">View Housing Fees</a>
+        <p>
+            The Writing, Sustainability, and Outdoor Adventure:
+            <a href="https://www.ncf.edu/life-at-new/where-to-live/living-learning-communities/">Living Learning Community</a>
+            They are located in Pritzker Hall.
+        </p>
+    </div>
+    
+    <div style="display:inline-block; width: 100%; margin-top: 0;">
+  <div class="ZDormYoutube" style="width: 50%; height: auto; float: left; display:inline-block;">
+    <iframe width="500" height="300" src="https://www.youtube.com/embed/M1AScqU0kVg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+
+  <div class="ZDormMap" style="width: 50%; height: auto; float:left; display: inline-block;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d685.1848532999891!2d-82.55669477785074!3d27.38450337760621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c33fd98a52b975%3A0xe5ce45bcfa001e2b!2sNew%20College%20of%20Florida%20Z-Green%20in%20front%20of%20Pritzker%20Residence%20Hall!5e1!3m2!1sen!2sus!4v1677875023898!5m2!1sen!2sus" width="450" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+</div>
+
+    <div style="margin: 60px 150px;" id="Bdorm">
+        <h2>Palmer B Dorm</h2>
+        <p>
+            Located on our historic Bayfront campus, Palmer B Dormitory, which is usually referenced as “B Dorm”, houses 32 
+            students in single bedrooms with common lounges and bathrooms. Because of its somewhat secluded location on campus, 
+            B Dorm is popular among thesis students and is known for the community spirit that develops among its residents. 
+            Bedrooms come in two sizes: approximately 12′ x 8′ and 16′ x 12.’
+        </p>
+    </div>
+
+    <div style="display:inline-block; width: 100%; margin-top: 0;">
+  <div class="BDormYoutube" style="width: 50%; height: auto; float: left; display:inline-block;">
+    <iframe width="500" height="300" src="https://www.youtube.com/embed/JcNE9YrMsBM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+
+  <div class="BDormMap" style="width: 50%; height: auto; float:left; display: inline-block;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d505.9488860444114!2d-82.55956419898811!3d27.3846227693944!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88c33fd849210c85%3A0x1e2bbad5797d697!2s557%2058th%20St%2C%20Sarasota%2C%20FL%2034234!5e1!3m2!1sen!2sus!4v1677875228774!5m2!1sen!2sus" width="450" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+</div>
+
+    <hr id="line1">
+
+    <div style="margin: 60px 150px;">
+        <h4>
+            Questions? Contact the Office of Housing & Residential Life
+        </h4>
+        <p>Find policy and procedure information, staff directory, and more.</p>
+
+        <button type="button" style="border: 6px solid #5886da; padding: 10px;"> 
+            <a href= " https://www.ncf.edu/departments/housing-residential-life/" alt='Second order cookie page' style="text-decoration:none"> 
+                <b> Housing & Residential Life </b>
+            </a>  
+        </button>
+    </div>
+
+    <hr id="line3">
+
+</body>
+
+<footer>
+        <p style="text-align:center;"> &copy; 2023 copyright Fantastic-Four</p>
+    </div>
+    <br>
+    <br>
+</footer>
+<script type="text/javascript" src="js/hover.js"></script>

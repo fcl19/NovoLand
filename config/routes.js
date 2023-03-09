@@ -13,6 +13,7 @@ module.exports.routes = {
   //  ╦ ╦╔═╗╔╗ ╔═╗╔═╗╔═╗╔═╗╔═╗
   //  ║║║║╣ ╠╩╗╠═╝╠═╣║ ╦║╣ ╚═╗
   //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
+
   '/': { view: 'pages/homepage', policy: 'sessionAuth' },
   '/login': { view: 'pages/login' }, // Login page
   '/register': { view: 'pages/register' }, // Register page
