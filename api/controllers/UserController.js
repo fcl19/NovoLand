@@ -124,14 +124,22 @@ module.exports = {
       if (!accountId) { // Get own account
         accountId = userId;
       }
-      let isSelfEdit = userId === accountId;
-      const foundUser = await Users.find({id: accountId});
+      let isSelfEdit = userId === parseInt(accountId);
+      const foundUser = await Users.find({id: accountId}).populate('tasks');
       if (!foundUser || foundUser.length === 0) { // User not found
         return res.view('pages/homepage', {
           error: 'User not found'
         });
       }
       const user = foundUser[0];
+      const tasks = await Tasks.find();
+      const userTasks = [];
+      for (let i = 0; i < user.tasks.length; i++) {
+        const foundTask = tasks.find(task => task.id === user.tasks[i].taskID);
+        if (foundTask) {
+          userTasks.push(foundTask);
+        }
+      }
       const account = { // Return account info
         id: user.id,
         firstName: user.firstName,
@@ -139,6 +147,7 @@ module.exports = {
         email: user.email,
         username: user.username,
         interests: user.interests,
+        tasks: userTasks,
         isSelfEdit: isSelfEdit
       };
       return res.view('pages/profile', {
