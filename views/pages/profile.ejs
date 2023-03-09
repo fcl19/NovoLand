@@ -54,6 +54,7 @@
   <label for="interests"><b>Interests:</b></label> <!-- label for interests -->
   <div id="interests" name="interests" class="userInfo"></div> <!-- div to hold interests -->
   <br/>
+  <label for="tasksCompleted"><b>Tasks Completed:</b></label> <!-- label for tasks completed -->
   <div id="tasksCompletedList"> <!-- div to hold tasks completed if any -->
   </div>
   <br/><br/><br/>
@@ -157,10 +158,9 @@
     $("#lastName").text(account.lastName); //set last name
     $("#email").text(account.email); //set email
     $("#interests").text(account.interests); //set interests
-    for (let task = 0; task < account.tasksCompleted.length; task += 1) { //for each task completed
-      $("#tasksCompletedList").append(`<label id='tasksCompletedTitle'>${task === 0 ? "<b>Tasks Completed:</b>" : ""}</label>`);
-      $("#tasksCompletedList").append(`<div id='tasksCompleted' name='tasksCompleted' class='userInfo'>${account.tasksCompleted[task]}</div>`);
-      $("#tasksCompletedList").append("<br/>");
+    for (let task = 0; task < account.tasks.length; task += 1) { //for each task completed
+      //$("#tasksCompletedList").append(`<label id='tasksCompletedTitle'>${task === 0 ? "<b>Tasks Completed:</b>" : ""}</label>`);
+      $("#tasksCompletedList").append(`<div id='tasksCompleted' class="task" title="${account.tasks[task].name}" name='tasksCompleted' class='userInfo'>${account.tasks[task].taskElement}</div>`);
     }  
   }
   initPage(); //call function to initialize page
@@ -198,6 +198,14 @@
   }
   .editButton {
     margin-left: 400px;
+  }
+  .task {
+    display: inline-block;
+    margin-left: 20px;
+    width: 5%;
+  }
+  #tasksCompletedList {
+    display: inline-block;
   }
 </style>
 
@@ -256,5 +264,4 @@
 
       
   </script>
-</body>
 
