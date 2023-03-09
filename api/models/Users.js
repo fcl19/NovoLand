@@ -30,5 +30,9 @@ module.exports = {
       type: 'string',
       defaultsTo: '',
     },
+    tasks: {
+      collection: 'usertasks',
+      via: 'userID',
+    }
   }
 };

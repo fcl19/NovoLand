@@ -26,10 +26,10 @@ module.exports.routes = {
   '/supplies': {view: 'pages/supplies', policy: 'sessionAuth'},
   '/events': {view: 'pages/events', policy: 'sessionAuth'},
   '/sarasota': {view: 'pages/sarasota', policy: 'sessionAuth'},
-  '/leaderboard': {view: 'pages/leaderboard', policy: 'sessionAuth'},
+  '/leaderboard': {view: 'pages/leaderboard', controller: 'LeaderboardController', action: 'viewLeaderboard', policy: 'sessionAuth'},
   '/profile': {view: 'pages/profile', policy: 'sessionAuth', controller: 'UserController', action: 'getAccount'}, // Profile page
-  
-  
+  '/tasks/complete': {controller: 'TaskController', action: 'completeTask', policy: 'sessionAuth'}, // Complete task action
+  '/leaderboard/fetch': {controller: 'LeaderboardController', action: 'fetchLeaderboard', policy: 'sessionAuth'}, // Fetch leaderboard action
 
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗

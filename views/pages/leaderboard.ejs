@@ -33,3 +33,222 @@
         </ul>
       </div>  
   </nav>
+<div id="leaderboardData" data-leaderboard="<%=leaderboard%>"></div>
+<div id="tasksToComplete" data-tasks="<%=tasksToComplete%>"></div>
+
+<div class="container">
+  <br>
+  <h2 class="subheadLightBlue">NuPath Leaderboard</h2>
+  <p>The NuPath Leaderboard keeps track of how much each student has engaged with the website (and prepared for NovoLand!) Complete all the tasks to become a NuPath Task Master and unlock a special surprise.  </p>
+  <p><strong>Don't forget to complete the following onboarding tasks: </strong></p>
+  <div id="tasksToCompleteContainer"></div>
+  <br>
+  <h2 class="subheadLightBlue">Task Masters</h2>
+  <div id="taskMasterContainer"></div>
+  <br>
+  <br>
+  <h2 class="subheadLightBlue">Leaderboard</h2>
+  <div id="leaderboardContainer"></div>
+</div>
+
+<script>
+  function updateLeaderboard() {
+    let leaderboardData;
+    let tasksToComplete;
+    $.ajax({
+      url: "/leaderboard/fetch",
+      type: "GET",
+      async: false,
+      success: function(data) {
+        leaderboardData = data.leaderboard;
+        tasksToComplete = data.tasksToComplete;
+      },
+      error: function(err) {
+        Swal.fire('There was an issue fetching the leaderboard', '', 'error');
+      }
+    });
+    if (leaderboardData && tasksToComplete) {
+      clearLeaderBoard();
+      buildLeaderBoard(leaderboardData);
+      buildTasksToComplete(tasksToComplete);
+    }
+  }
+  function buildTasksToComplete(tasksToComplete) {
+    for (const task of tasksToComplete) {
+      const Task = task.task;
+      if (task.isCompleted) {
+        $("#tasksToCompleteContainer").append(`<div id="taskContainer${Task.code}" class="disabled taskContainer"><input type="checkbox" id="task${Task.code}" data-taskid="${Task.code}" name="task${Task.id}" value="${Task.code}" disabled checked>
+        <label for="task${task.id}"><span id="taskDescription${Task.code}" class="disabled">${Task.taskDescription}<span></label><div><br>`);
+      } else {
+        $("#tasksToCompleteContainer").append(`<div id="taskContainer${Task.code}" class="taskContainer"><input type="checkbox" class="taskChecks" id="task${Task.code}" data-taskid="${Task.code}" name="task${Task.id}" value="${Task.code}">
+        <label for="task${task.id}"><span id="taskDescription${Task.code}">${Task.taskDescription}<span></label><div><br>`);
+      }
+    }
+    $(".taskChecks").each(function() {
+      const taskId = $(this).data("taskid");
+      $(this).on("change", function() {
+        if ($(this).is(":checked")) {
+          Swal.fire({
+          icon: 'question',
+          title: 'Do you want to complete this task?',
+          showCancelButton: true,
+          confirmButtonText: 'Complete',
+        }).then((result) => {
+          if (result.isConfirmed) {
+            $.ajax({
+              url: "/tasks/complete",
+              type: "GET",
+              data: {
+                code: taskId
+              },
+              async: false,
+              success: function(data) {
+                if (data.success) {
+                  Swal.fire('Saved!', '', 'success');
+                  updateLeaderboard();
+                }
+              },
+              error: function(err) {
+                Swal.fire('There was an issue completing the task', '', 'error')
+              }
+            })
+            //Swal.fire('Saved!', '', 'success')
+          } else {
+            $(`#task${taskId}`).prop("checked", false);
+          }
+        })
+        }
+      })
+    });
+  }
+  function buildLeaderBoard(leaderboardData) {
+    const taskMasters = [];
+    const leaderboard = [];
+    for (let i = 0; i < leaderboardData.length; i++) {
+      if (leaderboardData[i].isTaskMaster) {
+        taskMasters.push(leaderboardData[i]);
+      } else {
+        leaderboard.push(leaderboardData[i]);
+      }
+    }
+    leaderboard.sort((a, b) => {
+      return b.taskCompletionPercentage - a.taskCompletionPercentage;
+    });
+    taskMasters.sort((a, b) => {
+      return b.taskCompletionPercentage - a.taskCompletionPercentage;
+    });
+    if (taskMasters.length == 0) {
+      $("#taskMasterContainer").append(`<div class="taskMasterEntry">No Task Masters yet!<div>`);
+    }
+    if (leaderboard.length == 0) {
+      $("#leaderboardContainer").append(`<div class="leaderboardEntry">There is no one here yet!<div>`);
+    }
+    let taskMasterCount = 1;
+    let rowHtml = `<div class="row">`;
+    for (const taskMaster of taskMasters) {
+      let taskIcons = ``;
+      for (const task of taskMaster.tasks) {
+        taskIcons += `<div title="${task.name}" class="taskIcon">${task.taskElement}</div>`;
+      }
+      const htmlRow = `
+      <div class="col-sm-6" style="border: 3px solid lightblue;">
+        <!--Create a leaderboard box-->
+        <a id="leaderName" class="profileName" href="/profile?accountId=${taskMaster.id}">${taskMaster.firstName + " " + taskMaster.lastName}</a> <!--Place to add a name-->
+        <p id="completionRate">Total Task Completion: ${taskMaster.taskCompletionPercentage}%</p> <!--Place to add the total completion rate of tasks completed-->
+        ${taskIcons !== '' ? '<p id="finsihedTasks">Tasks Finished: </p> <!--Place to add the finished tasks-->' : ''}
+        <!--display Icons for the differnt tasks?-->
+        ${taskIcons}
+      </div>
+      `;
+      rowHtml += htmlRow;
+      if ((taskMasterCount % 2 === 0 && taskMasterCount !== 0) || taskMasterCount === taskMasters.length) {
+        rowHtml += `</div>`;
+        $("#taskMasterContainer").append(rowHtml);
+        rowHtml = `<div class="row">`;
+      }
+      taskMasterCount++;
+    }
+    let leaderBoardCount = 1;
+    rowHtml = `<div class="row">`;
+    for (const leader of leaderboard) {
+      let taskIcons = ``;
+      for (const task of leader.tasks) {
+        taskIcons += `<div title="${task.name}" class="taskIcon">${task.taskElement}</div>`;
+      }
+      const htmlRow = `
+      <div class="col-sm-6" style="border: 3px solid lightblue;">
+        <!--Create a leaderboard box-->
+        <a id="leaderName" class="profileName" href="/profile?accountId=${leader.id}">${leader.firstName + " " + leader.lastName}</a> <!--Place to add a name-->
+        <p id="completionRate">Total Task Completion: ${leader.taskCompletionPercentage}%</p> <!--Place to add the total completion rate of tasks completed-->
+        ${taskIcons !== '' ? '<p id="finsihedTasks">Tasks Finished: </p> <!--Place to add the finished tasks-->' : ''}
+        <!--display Icons for the differnt tasks?-->
+        ${taskIcons}
+      </div>
+      `;
+      rowHtml += htmlRow;
+      if ((leaderBoardCount % 2 === 0 && leaderBoardCount !== 0) || leaderBoardCount === leaderboard.length) {
+        rowHtml += `</div>`;
+        $("#leaderboardContainer").append(rowHtml);
+        rowHtml = `<div class="row">`;
+      }
+      leaderBoardCount++;
+    }
+  }
+  
+  function clearLeaderBoard() {
+    $("#tasksToCompleteContainer").empty();
+    $("#taskMasterContainer").empty();
+    $("#leaderboardContainer").empty();
+  }
+
+  function initPage() {
+    const leaderboardData = $("#leaderboardData").data("leaderboard");
+    const tasksToComplete = $("#tasksToComplete").data("tasks");
+    buildTasksToComplete(tasksToComplete);
+    buildLeaderBoard(leaderboardData);
+  }
+  initPage();
+</script>
+
+<style>
+  .leaderboardTitle {
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+  }
+  .leaderboardDesc {
+    margin: auto;
+    width: 80%;
+    padding: 10px;
+    padding-left: 80px;
+  }
+  .leaderboardHeading {
+    text-align: center;
+  }
+  .leaderboardContainer {
+    text-align: center;
+  }
+  .taskIcon {
+    display: inline;
+    margin-right: 5px;
+    font-size: large;
+  }
+  #finsihedTasks {
+    margin-bottom: 0px;
+  }
+  #completionRate {
+    margin-top: 12px;
+  }
+  .profileName {
+    font-weight: bold;
+    text-decoration: underline;
+    padding-bottom: 20px;
+  }
+  .disabled {
+    text-decoration: line-through;
+    color: gray;
+  }
+  .taskContainer {
+    margin-bottom: -20px;
+  }
+</style>
