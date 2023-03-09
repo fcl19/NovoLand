@@ -13,18 +13,25 @@ module.exports.routes = {
   //  ╦ ╦╔═╗╔╗ ╔═╗╔═╗╔═╗╔═╗╔═╗
   //  ║║║║╣ ╠╩╗╠═╝╠═╣║ ╦║╣ ╚═╗
   //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
-  '/': { view: 'pages/homepage' },
-  '/messages': {view: 'pages/messages'},
-  '/residence_halls': {view: 'pages/residence_halls'},
-  '/dining': {view: 'pages/dining'},
-  '/supplies': {view: 'pages/supplies'},
-  '/events': {view: 'pages/events'},
-  '/sarasota': {view: 'pages/sarasota'},
-  '/leaderboard': {view: 'pages/leaderboard'},
-  '/profile': {view: 'pages/profile'},
+
+  '/': { view: 'pages/homepage', policy: 'sessionAuth' },
+  '/login': { view: 'pages/login' }, // Login page
+  '/register': { view: 'pages/register' }, // Register page
+  '/user/login': 'UserController.login', // Login action
+  '/user/logout': 'UserController.logout', // Logout action
+  '/user/register': 'UserController.createAccount', // Register action
+  '/user/edit': {controller: 'UserController', action: 'editAccount', policy: 'sessionAuth'}, // Edit account action
+  '/messages': {view: 'pages/messages', policy: 'sessionAuth' },
+  '/residence_halls': {view: 'pages/residence_halls', policy: 'sessionAuth'},
+  '/dining': {view: 'pages/dining', policy: 'sessionAuth'},
+  '/supplies': {view: 'pages/supplies', policy: 'sessionAuth'},
+  '/events': {view: 'pages/events', policy: 'sessionAuth'},
+  '/sarasota': {view: 'pages/sarasota', policy: 'sessionAuth'},
+  '/leaderboard': {view: 'pages/leaderboard', controller: 'LeaderboardController', action: 'viewLeaderboard', policy: 'sessionAuth'},
+  '/profile': {view: 'pages/profile', policy: 'sessionAuth', controller: 'UserController', action: 'getAccount'}, // Profile page
+  '/tasks/complete': {controller: 'TaskController', action: 'completeTask', policy: 'sessionAuth'}, // Complete task action
+  '/leaderboard/fetch': {controller: 'LeaderboardController', action: 'fetchLeaderboard', policy: 'sessionAuth'}, // Fetch leaderboard action
   '/new_post': {view: 'pages/new_post'},
-  
-  
 
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
