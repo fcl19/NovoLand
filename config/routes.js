@@ -13,6 +13,7 @@ module.exports.routes = {
   //  ╦ ╦╔═╗╔╗ ╔═╗╔═╗╔═╗╔═╗╔═╗
   //  ║║║║╣ ╠╩╗╠═╝╠═╣║ ╦║╣ ╚═╗
   //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
+
   '/': { view: 'pages/homepage', policy: 'sessionAuth' },
   '/login': { view: 'pages/login' }, // Login page
   '/register': { view: 'pages/register' }, // Register page
@@ -28,6 +29,8 @@ module.exports.routes = {
   '/sarasota': {view: 'pages/sarasota', policy: 'sessionAuth'},
   '/leaderboard': {view: 'pages/leaderboard', policy: 'sessionAuth'},
   '/profile': {view: 'pages/profile', policy: 'sessionAuth', controller: 'UserController', action: 'getAccount'}, // Profile page
+
+
   
   
 
