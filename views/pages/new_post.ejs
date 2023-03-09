@@ -36,10 +36,34 @@
 
 
   <body id="new_post_body">
+
+    <form><br>
+      Enter your First Name: <input type="text" id="firstname"/><br><br>
+      Enter your Last Name: <input type="text" id="lastname"/><br><br>
+    </form>
+
     <h3 id="new_post_head">New Post</h3>
     <form id="post_form">
         <textarea id = "post_input" placeholder="Type your post here" rows="10"  required></textarea>
-        <input id= "submit" type="submit" value="Post">
+        <input type="submit" value="Post" onclick="formdata()"/><br>
     </form>
+    
+    <script>
+      function formdata() 
+      {
+        var firstname= document.getElementById("firstname").value;
+        var lastname= document.getElementById("lastname").value;
+        var post = document.getElementById("post_input").value;
+
+        document.writeln("<h1>Confirmation Page</h1><br>");
+        document.writeln("Thank you for completing this form.<br><br>");
+        document.writeln("The first name you entered is " + firstname + "<br>");
+        document.writeln("The last name you entered is " + lastname + "<br>");
+        
+        document.writeln("The post you entered: " + post);
+
+        //window.location.href = "http://localhost:1337/";
+      }
+      </script>
   </body>
 
