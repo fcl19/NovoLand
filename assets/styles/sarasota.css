@@ -4,6 +4,32 @@
     margin: auto;
 }
 
+
+#map_mg, #head_mamag, #p_mamag, #shelf_map, #shelf_head, #shelf_p, #walg_head, #wf_head, #pub_head, #lido_head, #er_head, #golf_head, #walg_p, #wf_p, #pub_p, #lido_p, #er_p, #golf_p, #walg_map, #wf_map, #pub_map, #lido_map, #er_map, #golf_map, #md_head, #md_p, #md_map, #cub_head, #cub_p, #cub_map, #za_head, #za_p, #za_map{
+    margin: auto;
+    text-align: center;
+}
+#map_mg, #shelf_map, #walg_map, #wf_map, #pub_map, #lido_map, #er_map, #golf_map, #md_map, #cub_map, #za_map{
+    display:block;
+    margin:auto;
+}
+
+.col-sm-6{
+    padding: 3%;
+}
+
+#resturants_head, #grocery_head, #fun_head, #transport_head{
+    display: block;
+    padding: 3%;
+    text-align: center;
+    
+}
+
+.transportation{
+    padding: 3%;
+}
+
+/*
 .resturants, .grocery, .fun, .transport{
     padding: 5%;
     display: block;
@@ -22,23 +48,23 @@
     float: left;
     width: 90%;
 }
-.mamag_text, .shelf_text, .walg_text, .wf_text, .pub_text, .lido_text, .er_text, .golf_text{
+.mamag_text, .walg_text, .wf_text, .pub_text, .lido_text, .er_text, .golf_text{
     float: left;
     width: 50%;
     text-align: center;
 }
 
-#mamag_head, #shelf_head, #walg_head, #wf_head, #pub_head, #lido_head, #er_head, #golf_head{
+#mamag_head,  #walg_head, #wf_head, #pub_head, #lido_head, #er_head, #golf_head{
     display: block;
     padding-top: 15px;
 }
 
-#mamag_p, #shelf_p, #walg_p, #wf_p, #pub_p, #lido_p, #er_p, #golf_p{
+#mamag_p,  #walg_p, #wf_p, #pub_p, #lido_p, #er_p, #golf_p{
     display: block;
 }
 
 
-#mamag_map, #shelf_map, #walg_map, #wf_map, #pub_map, #lido_map, #er_map, #golf_map{
+#mamag_map,  #walg_map, #wf_map, #pub_map, #lido_map, #er_map, #golf_map{
     float: right;
     padding:15px;
-}
+} */
