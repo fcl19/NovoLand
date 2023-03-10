@@ -22,11 +22,14 @@ module.exports.routes = {
   '/user/register': 'UserController.createAccount', // Register action
   '/user/edit': {controller: 'UserController', action: 'editAccount', policy: 'sessionAuth'}, // Edit account action
   '/messages': {view: 'pages/messages', policy: 'sessionAuth' },
+  '/new_post': {view: 'pages/new_post', policy: 'sessionAuth'},
   '/residence_halls': {view: 'pages/residence_halls', policy: 'sessionAuth'},
   '/dining': {view: 'pages/dining', policy: 'sessionAuth'},
   '/supplies': {view: 'pages/supplies', policy: 'sessionAuth'},
   '/events': {view: 'pages/events', policy: 'sessionAuth'},
   '/sarasota': {view: 'pages/sarasota', policy: 'sessionAuth'},
+  '/scheduler': {view: 'pages/scheduler', policy: 'sessionAuth'},
+  '/new_event': {view: 'pages/new_event', policy: 'sessionAuth'},
   '/leaderboard': {view: 'pages/leaderboard', controller: 'LeaderboardController', action: 'viewLeaderboard', policy: 'sessionAuth'},
   '/profile': {view: 'pages/profile', policy: 'sessionAuth', controller: 'UserController', action: 'getAccount'}, // Profile page
   '/tasks/complete': {controller: 'TaskController', action: 'completeTask', policy: 'sessionAuth'}, // Complete task action
@@ -35,6 +38,7 @@ module.exports.routes = {
   '/post': {view: 'pages/post'},
   '/post/create': {controller: 'PostsController', action: 'createPost', policy: 'sessionAuth'},
   '/post/fetch': {controller: 'PostsController', action: 'fetchPosts', policy: 'sessionAuth'},
+
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
   //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗

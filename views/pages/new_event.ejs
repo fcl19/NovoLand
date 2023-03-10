@@ -1,0 +1,104 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">NuPath</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/messages">Messages</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Information
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item " href="/residence_halls">Residence Halls</a></li>
+            <li><a class="dropdown-item" href="https://www.ncf.edu/life-at-new/where-to-eat/">On-campus Dining</a></li>
+            <li><a class="dropdown-item" href="/supplies">Supplies</a></li>
+            <li><a class="dropdown-item" href="/events">Campus Events</a></li>
+            <li><a class="dropdown-item" href="/sarasota">Sarasota</a></li>
+            <li><a class = "dropdown-item" href="/scheduler">Scheduler</a></li>
+          </ul>
+  
+        </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/leaderboard">Leaderboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/profile">Profile</a>
+          </li>    
+        </ul>
+      </div>  
+
+    </nav>
+
+<form id = "new_event_form">
+    <h2 id = "new_event_head">Add a Class or Event</h2>
+      <hr>
+
+      <label for="newEventDate">
+        <strong>Select Date: </strong>
+      </label>
+      <input type="date" id="newEventDate" name="eventDate" required>
+
+      <br>
+      <label for="eventName">
+        <strong>Event Name</strong>
+      </label>
+      <input type="text" id="eventName" placeholder="Event Name" name="subject" required>
+      
+      <br>
+      <!--Radio button for selecting all day event-->
+      <input class = "allDayEvent" type="checkbox" id="allDayEvent" name="allDayEvent">
+      <label for="allDayEvent">All Day Event</label><br>
+
+      <br>
+      <!--Start and end times if all day event isnt selected-->
+      <div class="eventTime" id="eventTime">
+        <label for="startTime"><strong>Start Time: </strong></label>
+        <input type="time" id="startTime" name="startTime"
+       min="09:00" max="18:00">
+       
+
+
+       <label for="endTime"><strong>End Time: </strong></label>
+       <input type="time" id="endTime" name="endTime"
+      min="09:00" max="18:00">
+      </div>
+
+      <!--Radio buttons for whether it reoccurs-->
+      <br>
+      <p><strong>Select how often the event reoccurs: </strong></p>
+      <div class="radioButtonAlign">
+        <input type="radio" id="notReoccur" name="reoccuring" value="NO">
+        <label for="notReoccur">Not Reoccuring</label><br>
+        
+        <input type="radio" id="dailyReoccur" name="reoccuring" value="D">
+        <label for="dailyReoccur">Daily</label><br>
+        
+        <input type="radio" id="weeklyReoccur" name="reoccuring" value="W">
+        <label for="weeklyReoccur">Weekly</label><br>
+        
+        <input type="radio" id="monthlyReoccur" name="reoccuring" value="M">
+        <label for="monthlyReoccur">Monthly</label><br>
+      </div>
+
+      <!--cancel and submit event buttons-->
+      <br>
+      <button type="submit" class="endButton">Submit</button>
+      <button type="button" class="endButton" onclick="closeForm()">Cancel</button>
+      <br>
+</form>
+
+<style>
+    #new_event_form{
+        margin: 2.5%
+    }
+    #new_event_head{
+        margin-bottom: 2%;
+    }
+</style>
