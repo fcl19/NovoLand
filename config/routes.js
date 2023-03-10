@@ -14,6 +14,7 @@ module.exports.routes = {
   //  ║║║║╣ ╠╩╗╠═╝╠═╣║ ╦║╣ ╚═╗
   //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
 
+
   '/': { view: 'pages/homepage', policy: 'sessionAuth' },
   '/login': { view: 'pages/login' }, // Login page
   '/register': { view: 'pages/register' }, // Register page
@@ -22,6 +23,7 @@ module.exports.routes = {
   '/user/register': 'UserController.createAccount', // Register action
   '/user/edit': {controller: 'UserController', action: 'editAccount', policy: 'sessionAuth'}, // Edit account action
   '/messages': {view: 'pages/messages', policy: 'sessionAuth' },
+  '/new_post': {view: 'pages/new_post', policy: 'sessionAuth'},
   '/residence_halls': {view: 'pages/residence_halls', policy: 'sessionAuth'},
   '/dining': {view: 'pages/dining', policy: 'sessionAuth'},
   '/supplies': {view: 'pages/supplies', policy: 'sessionAuth'},
@@ -31,6 +33,7 @@ module.exports.routes = {
   '/profile': {view: 'pages/profile', policy: 'sessionAuth', controller: 'UserController', action: 'getAccount'}, // Profile page
   '/tasks/complete': {controller: 'TaskController', action: 'completeTask', policy: 'sessionAuth'}, // Complete task action
   '/leaderboard/fetch': {controller: 'LeaderboardController', action: 'fetchLeaderboard', policy: 'sessionAuth'}, // Fetch leaderboard action
+
 
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
