@@ -26,6 +26,11 @@ module.exports = {
     new_post:function(req, res){
         res.view('new_post');
     },
-
+    scheduler: function(req, res){
+        res.view('scheduler');
+    },
+    new_event: function(req, res){
+        res.view('new_event');
+    }
 
 };
