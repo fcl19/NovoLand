@@ -14,7 +14,7 @@ module.exports.routes = {
   //  ║║║║╣ ╠╩╗╠═╝╠═╣║ ╦║╣ ╚═╗
   //  ╚╩╝╚═╝╚═╝╩  ╩ ╩╚═╝╚═╝╚═╝
 
-  '/': { view: 'pages/homepage', policy: 'sessionAuth' },
+  '/': { view: 'pages/homepage', policy: 'sessionAuth', controller: 'PostsController', action: 'fetchPosts' },
   '/login': { view: 'pages/login' }, // Login page
   '/register': { view: 'pages/register' }, // Register page
   '/user/login': 'UserController.login', // Login action
@@ -32,7 +32,9 @@ module.exports.routes = {
   '/tasks/complete': {controller: 'TaskController', action: 'completeTask', policy: 'sessionAuth'}, // Complete task action
   '/leaderboard/fetch': {controller: 'LeaderboardController', action: 'fetchLeaderboard', policy: 'sessionAuth'}, // Fetch leaderboard action
   '/new_post': {view: 'pages/new_post'},
-
+  '/post': {view: 'pages/post'},
+  '/post/create': {controller: 'PostsController', action: 'createPost', policy: 'sessionAuth'},
+  '/post/fetch': {controller: 'PostsController', action: 'fetchPosts', policy: 'sessionAuth'},
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
   //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗
