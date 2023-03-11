@@ -1,0 +1,133 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">NuPath</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="collapsibleNavbar">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/messages">Messages</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Information
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item " href="/residence_halls">Residence Halls</a></li>
+            <li><a class="dropdown-item" href="https://www.ncf.edu/life-at-new/where-to-eat/">On-campus Dining</a></li>
+            <li><a class="dropdown-item" href="/supplies">Supplies</a></li>
+            <li><a class="dropdown-item" href="/events">Campus Events</a></li>
+            <li><a class="dropdown-item" href="/sarasota">Sarasota</a></li>
+            <li><a class = "dropdown-item" href="/scheduler">Scheduler</a></li>
+          </ul>
+  
+        </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/leaderboard">Leaderboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/profile">Profile</a>
+          </li>    
+        </ul>
+      </div>  
+  </nav>
+
+<div class="catPicsContainer">
+    <p>Choose a profile picture: </p>
+    <div class="catPics">
+        <img id="catPic1" src="images/pictures/cat1.jpg" alt="cat picture 1" style="width:30%">
+        <img id="catPic2" src="images/pictures/cat2.jfif" alt="cat picture 2" style="width:30%">
+        <img id="catPic3" src="images/pictures/cat3.jpg" alt="cat picture 3" style="width:30%">
+        <img id="catPic4" src="images/pictures/cat4.webp" alt="cat picture 4" style="width:30%">
+        <img id="catPic5" src="images/pictures/cat5.jpg" alt="cat picture 5" style="width:30%">
+        <img id="catPic6" src="images/pictures/cat6.jpg" alt="cat picture 6" style="width:30%">
+    </div>
+    <hr>
+
+    <div>
+        <p> Profile Picture: (Test Purposes)</p>
+        <img id="profileIcon" src="images/pictures/ppIcon.png" alt="profile icon" style="width:30%">
+    </div>
+    <br>
+    <button id="resetBtn">Reset</button>
+    <button id="saveBtn" class="#saveProfilePic">Save</button>
+  </div>
+
+  <script>
+      var profileIconImg = document.getElementById('profileIcon')
+
+      catPic1.onclick = function(){
+          profileIconImg.src = "images/pictures/cat1.jpg";
+      }
+
+      catPic2.onclick = function(){
+          profileIconImg.src = "images/pictures/cat2.jfif";
+      }
+
+      catPic3.onclick = function(){
+          profileIconImg.src = "images/pictures/cat3.jpg";
+      }
+
+      catPic4.onclick = function(){
+          profileIconImg.src = "images/pictures/cat4.webp";
+      }
+
+      catPic5.onclick = function(){
+          profileIconImg.src = "images/pictures/cat5.jpg";
+      }
+
+      catPic6.onclick = function(){
+          profileIconImg.src = "images/pictures/cat6.jpg";
+      }
+
+      resetBtn.onclick = function(){
+          profileIconImg.src = "images/pictures/ppIcon.png";
+      }
+
+      
+  </script>
+
+<script>
+     $("#saveProfilePic").click(function() { //save button
+        var profileIconImg = document.getElementById('profileIcon');
+
+        $.ajax({ //send ajax request to save changes
+          url: "/profile/editPicture", //edit user route
+          type: "GET", //get request
+          data: { //data to send
+            profilePic: profileIconImg
+          },
+          success: function(data) { //on success
+            if (data.success) { //if success
+
+              Swal.fire({ //show success alert
+                title: "Success",
+                text: "Your changes have been saved.",
+                icon: "success",
+                confirmButtonText: "Ok"
+              });
+            } else {
+              Swal.fire({ //show error alert
+                title: "Error",
+                text: data.error,
+                icon: "error",
+                confirmButtonText: "Ok"
+              });
+            }
+          },
+          error: function(err) { //on error
+            Swal.fire({ //show error alert
+              title: "Error",
+              text: "An error occurred while trying to save your changes.",
+              icon: "error",
+              confirmButtonText: "Ok"
+            })
+          }
+        });
+      });
+   
+    </script>
+

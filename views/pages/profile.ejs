@@ -39,6 +39,7 @@
 <br/>
 <h2 id="profileHeader">Account Information</h2> <!-- header for page -->
 <div class="accountContainer"> <!-- container for account info -->
+
   <br/>
   <label for="username"><b>Username:</b></label> <!-- label for username -->
   <div id="username" name="username" class="userInfo"></div> <!-- div to hold username -->
@@ -61,11 +62,16 @@
   <br/><br/><br/>
   <div class="selfEditButtons"><button id="logout">Logout</button><button id="editAccountValues" class="editButton">Edit Account</button></div> <!-- div to hold edit and logout buttons -->
   <button id="saveAccountValues" class="editButton">Save Changes</button> <!-- button to save changes -->
+  <br>
+  <br>
+  <a href="/edit_profile_pic">
+  <button id="newProfilePic" class="profileButton">Edit Profile Picture</button></a>
 </div>
 
 <script>
   function initPage() { //function to initialize page
     $("#saveAccountValues").hide(); //hide save button
+    
     let account = $("#accountInfo").data("account"); //get account info from data-account attribute
     if (account.isSelfEdit) { //if user is viewing their own profile
       $("#profileHeader").text("My Profile"); //change header to "My Profile"
@@ -75,6 +81,7 @@
         $("#email").html(`<input type="text" id="emailInput" name="emailInput" value="${account.email}">`); //change to input
         $("#interests").html(`<input type="text" id="interestsInput" name="interestsInput" value="${account.interests}">`); //change to input
         $("#editAccountValues").hide(); //hide edit button
+        $("#newProfilePic").hide(); //hide edit profile picture button
         $("#saveAccountValues").show(); //show save button
       });
       $("#saveAccountValues").click(function() { //save button
@@ -200,6 +207,10 @@
   .editButton {
     margin-left: 400px;
   }
+
+  .profileButton{
+    margin-left: 453px;
+  }
   .task {
     display: inline-block;
     margin-left: 20px;
@@ -211,58 +222,4 @@
 </style>
 
 
-  <div class="catPicsContainer">
-    <p>Choose a profile picture: </p>
-    <div class="catPics">
-        <img id="catPic1" src="images/pictures/cat1.jpg" alt="cat picture 1" style="width:30%">
-        <img id="catPic2" src="images/pictures/cat2.jfif" alt="cat picture 2" style="width:30%">
-        <img id="catPic3" src="images/pictures/cat3.jpg" alt="cat picture 3" style="width:30%">
-        <img id="catPic4" src="images/pictures/cat4.webp" alt="cat picture 4" style="width:30%">
-        <img id="catPic5" src="images/pictures/cat5.jpg" alt="cat picture 5" style="width:30%">
-        <img id="catPic6" src="images/pictures/cat6.jpg" alt="cat picture 6" style="width:30%">
-    </div>
-    <hr>
-
-    <div>
-        <p> Profile Picture: (Test Purposes)</p>
-        <img id="profileIcon" src="images/pictures/ppIcon.png" alt="profile icon" style="width:30%">
-    </div>
-    <br>
-    <button id="resetBtn">Reset</button>
-    <button id="saveBtn">Save</button>
-  </div>
-
-  <script>
-      var profileIconImg = document.getElementById('profileIcon')
-
-      catPic1.onclick = function(){
-          profileIconImg.src = "images/pictures/cat1.jpg";
-      }
-
-      catPic2.onclick = function(){
-          profileIconImg.src = "images/pictures/cat2.jfif";
-      }
-
-      catPic3.onclick = function(){
-          profileIconImg.src = "images/pictures/cat3.jpg";
-      }
-
-      catPic4.onclick = function(){
-          profileIconImg.src = "images/pictures/cat4.webp";
-      }
-
-      catPic5.onclick = function(){
-          profileIconImg.src = "images/pictures/cat5.jpg";
-      }
-
-      catPic6.onclick = function(){
-          profileIconImg.src = "images/pictures/cat6.jpg";
-      }
-
-      resetBtn.onclick = function(){
-          profileIconImg.src = "images/pictures/ppIcon.png";
-      }
-
-      
-  </script>
-
+  

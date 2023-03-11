@@ -8,6 +8,8 @@
  * https://sailsjs.com/anatomy/config/routes-js
  */
 
+const profilePictureController = require("../api/controllers/profilePictureController");
+
 module.exports.routes = {
 
   //  ╦ ╦╔═╗╔╗ ╔═╗╔═╗╔═╗╔═╗╔═╗
@@ -21,6 +23,8 @@ module.exports.routes = {
   '/user/logout': 'UserController.logout', // Logout action
   '/user/register': 'UserController.createAccount', // Register action
   '/user/edit': {controller: 'UserController', action: 'editAccount', policy: 'sessionAuth'}, // Edit account action
+  '/edit_profile_pic':{view: 'pages/edit_profile_pic'},
+  '/profile/editPicture':{controller: 'profilePictureController', action: 'saveProfilePic', policy: 'sessionAuth'},
   '/messages': {view: 'pages/messages', policy: 'sessionAuth' },
   '/new_post': {view: 'pages/new_post', policy: 'sessionAuth'},
   '/residence_halls': {view: 'pages/residence_halls', policy: 'sessionAuth'},
