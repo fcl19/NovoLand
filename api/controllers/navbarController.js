@@ -33,4 +33,5 @@ module.exports = {
         res.view('new_event');
     }
 
+
 };

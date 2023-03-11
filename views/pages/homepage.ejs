@@ -44,8 +44,7 @@
   </div>
   <div style="width: 70%; height: auto; display:inline-block;">
       <div>
-        <a href="/new_post">
-          <img class="create" src="images/pictures/plusPost.png" alt="New Post icon" style="width: 10%; height: 10%; display: block;
+          <img class="create" id="createPostButton" src="images/pictures/plusPost.png" alt="New Post icon" style="width: 10%; height: 10%; display: block;
           margin-left: auto;
           margin-right: auto;">
         </a>
@@ -53,68 +52,41 @@
   </div> 
 </div>
 
-<div class="posts-wrapper" style="margin: 30px 150px;">
-  <div style="border: 6px solid #487CB4; padding: 10px; margin-top: 1%;">
-      <div> <!-- (PLACE HOLDER) This needs to be fetched from the database-->
-          <h3> <b> Poster Name</b> </h3>
-          <h6> MM/DD/YYYY</h6>
-      </div>
-      <p >  <!-- (PLACE HOLDER) This needs to be fetched from the database-->
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-          et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-          aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-          culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-  </div>
-
-  <div style="border: 6px solid #487CB4; padding: 10px; margin-top: 1%;">
-      <div> <!-- (PLACE HOLDER) This needs to be fetched from the database-->
-          <h3> <b> Poster Name</b> </h3>
-          <h6> MM/DD/YYYY</h6>
-      </div>
-      <img src="images/pictures/catPic.jpg" alt="Cat picture" width="250" height="300">
-  </div>
-
-  <div style="border: 6px solid #487CB4; padding: 10px; margin-top: 1%;">
-      <div> <!-- (PLACE HOLDER) This needs to be fetched from the database-->
-          <h3> <b> Poster Name</b> </h3>
-          <h6> MM/DD/YYYY</h6>
-      </div>
-      
-      <p > <!-- (PLACE HOLDER) This needs to be fetched from the database-->
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-          et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-          aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-          culpa qui officia deserunt mollit anim id est laborum.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-          et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-          aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-          culpa qui officia deserunt mollit anim id est laborum.
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-          et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-          aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-          culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-  </div>
-
-  <div style="border: 6px solid #487CB4; padding: 10px; margin-top: 1%;">
-      <div> <!-- (PLACE HOLDER) This needs to be fetched from the database-->
-          <h3> <b> Poster Name</b> </h3>
-          <h6> MM/DD/YYYY</h6>
-      </div>
-      <p > <!-- (PLACE HOLDER) This needs to be fetched from the database-->
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-          et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut 
-          aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 
-          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in 
-          culpa qui officia deserunt mollit anim id est laborum.
-      </p>
-  </div>
+<div id="postData" data-post="<%=postdata%>">
 </div>
+
+
+<div class="posts-wrapper" style="margin: 30px 150px;">
+  <!-- This will get's the posts from new_post.ejs-->
+</div>
+
+
+<script> // Template post
+  $(document).ready(() => {console.log($("#postData").data('post'));
+  $("#createPostButton").on("click", () => {
+    window.location.href = "/new_post";
+  }
+  );
+  
+  // sort the posts by date
+  const post = $("#postData").data('post').sort((a, b) => {
+    return new Date(b.createdAt) - new Date(a.createdAt);
+  });
+  for(let i = 0; i < post.length; i++){
+    $(".posts-wrapper").append(`
+  <div style="border: 6px solid #487CB4; padding: 10px; margin-top: 1%;">
+      <div>
+          <h3> <b>${post[i].userId.firstName + " " + post[i].userId.lastName } </b> </h3>
+          <h6> ${new Date(post[i].createdAt).toLocaleString('en-US') }</h6>
+      </div>
+      <p>  
+        ${post[i].body}
+      </p>
+  </div>
+  `);
+  }});
+  
+</script>
 </body>
 
 <footer style="margin-top: 3%;">
