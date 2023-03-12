@@ -1,5 +1,6 @@
 #sup_Header{
     padding: 20px;
+    color: #487CB4;
 }
 
 .accordian, .complete{
@@ -13,10 +14,12 @@
 
 #online_head{
 	margin-left: 0px;
+    color: #23488D;
 }
 
 #in_town_head{
 	margin-left: 3%;
+    color: #23488D;
 }
 
 
