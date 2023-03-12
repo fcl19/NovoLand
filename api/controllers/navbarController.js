@@ -31,6 +31,9 @@ module.exports = {
     },
     new_event: function(req, res){
         res.view('new_event');
+    },
+    aboutUs: function(req, res){
+        res.view('aboutUs');
     }
 
 
