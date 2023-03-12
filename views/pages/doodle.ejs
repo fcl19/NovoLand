@@ -1,0 +1,74 @@
+<div class="canvasContainer">
+  <div id="sketchPadContainer">
+    <canvas id="sketchpad"></canvas>
+  </div>
+  <div>
+    <button class="canvasButton" id="clear">Clear</button>
+    <button class="canvasButton" id="undo">Undo</button>
+    <button class="canvasButton" id="redo">Redo</button>
+    <input type="color" id="color" value="#000000">
+    <input type="range" id="size" min="1" max="200" value="10">
+    <button class="canvasButton" id="animate">animate</button>
+    <input type="range" id="speed" min="1" max="100" value="10">
+  </div>
+</div>
+<script>
+  var sketchpad; 
+  $(document).ready(function() {
+    sketchpad = new Sketchpad({
+      element: '#sketchpad',
+      width: 500,
+      height: 500,
+    });
+    $("#size").on("change", function(event) {
+      sketchpad.penSize = $(this).val();
+    });
+    $("#color").on("change", function(event) {
+      sketchpad.color = $(this).val();
+    });
+    $("#clear").on("click", function(event) {
+      $("#sketchpad").remove();
+      $("#sketchPadContainer").append('<canvas id="sketchpad"></canvas>');
+      sketchpad = new Sketchpad({
+        element: '#sketchpad',
+        width: 500,
+        height: 500,
+      });
+      sketchpad.penSize = $("#size").val();
+      sketchpad.color = $("#color").val();
+    });
+    $("#undo").on("click", function(event) {
+      sketchpad.undo();
+    });
+    $("#redo").on("click", function(event) {
+      sketchpad.redo();
+    });
+    $("#animate").on("click", function(event) {
+      sketchpad.cancelAnimation();
+      sketchpad.animate(parseInt($("#speed").val()));
+    });
+  });
+</script>
+
+<style>
+  .canvasContainer {
+    margin: auto;
+    width: 50%;
+    height: 50%;
+  }
+  .canvasButton {
+    margin: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+  #sketchpad {
+    margin-top: 50%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  #penSize {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+</style>
