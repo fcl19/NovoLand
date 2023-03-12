@@ -102,3 +102,14 @@
         margin-bottom: 2%;
     }
 </style>
+
+<script>
+  
+  $(".allDayEvent").click(function() {
+    if($(this).is(":checked")) {
+        $(".eventTime").hide(300);
+    } else {
+        $(".eventTime").show(200);
+    }
+  });
+</script>
