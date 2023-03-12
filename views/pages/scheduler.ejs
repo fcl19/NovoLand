@@ -40,7 +40,8 @@
 
 
     <body>
-      <h1>My Schedule</h1>
+      <br>
+      <h1 class="subheadLightBlue">My Schedule</h1>
       <br>
       <br>
 
@@ -131,7 +132,9 @@ body{
 }
 .wrapper{
   align-items: center;
-  width: 450px;
+  /*width: 450px;*/
+  max-width: 100%;
+  height: auto;
   background: #fff;
   border-radius: 10px;
   box-shadow: 0 15px 40px rgba(0,0,0,0.12);
@@ -218,7 +221,8 @@ header .current-date{
   background: #f2f2f2;
 }
        
-      </style>
+</style>
+
 <script>
     
   $("#createEvent").on("click", () => {
@@ -226,6 +230,8 @@ header .current-date{
   }
   );
 </script>
+
+
 <script>
   const daysTag = document.querySelector(".days"),
 currentDate = document.querySelector(".current-date"),
