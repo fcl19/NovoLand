@@ -31,6 +31,9 @@ module.exports = {
     },
     new_event: function(req, res){
         res.view('new_event');
+    },
+    orientation: function(req,res){
+        res.view('orientation');
     }
 
 
