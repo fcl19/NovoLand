@@ -1,24 +1,172 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <a class="navbar-brand" href="#">NuPath</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/messages">Messages</a>
+      </li>
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Information
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item " href="/residence_halls">Residence Halls</a></li>
+            <li><a class="dropdown-item" href="https://www.ncf.edu/life-at-new/where-to-eat/">On-campus Dining</a></li>
+            <li><a class="dropdown-item" href="/supplies">Supplies</a></li>
+            <li><a class="dropdown-item" href="/events">Campus Events</a></li>
+            <li><a class="dropdown-item" href="/sarasota">Sarasota</a></li>
+            <li><a class = "dropdown-item" href="/scheduler">Scheduler</a></li>
+          </ul>
+ 
+        </li>
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="/leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">Profile</a>
+        </li>
+        <li>
+          <a class="nav-link active" href="/doodle">Doodle</a>
+        </li>
+      </ul>
+    </div>  
+</nav>
+
+<div id="drawingData" data-drawing="<%=drawing%>" data-drawingids="<%=userDrawingIDs%>" data-drawingid="<%=drawingID%>"></div>
+<input type='hidden' name='_csrf' value='<%= _csrf %>'>
+<div id="sizeSelection">
+  <button id="p1" class="sizeButton">3x3 <br/> (Mobile Friendly)</button>
+  <button id="p2" class="sizeButton">5x5</button>
+  <button id="p3" class="sizeButton">8x8</button>
+</div>
 <div class="canvasContainer">
-  <div id="sketchPadContainer">
+  <div id="sketchPadContainer" class="">
     <canvas id="sketchpad"></canvas>
   </div>
-  <div>
+  <div class="canvasOptions">
     <button class="canvasButton" id="clear">Clear</button>
     <button class="canvasButton" id="undo">Undo</button>
     <button class="canvasButton" id="redo">Redo</button>
     <input type="color" id="color" value="#000000">
+    <br/>
+    <label for="size">Pen Size</label>
+    <br/>
     <input type="range" id="size" min="1" max="200" value="10">
+    <br/>
     <button class="canvasButton" id="animate">animate</button>
-    <input type="range" id="speed" min="1" max="100" value="10">
+    <br/>
+    <label for="speed">Animation Speed</label>
+    <br/>
+    <input type="range" id="speed" min="1" max="50" value="10">
+    <br/>
+    <button class="canvasButton" id="save">Save</button>
+    <label for="drawingName">Drawing Name</label>
+    <input type="text" id="drawingName" name="drawingName" placeholder="Drawing Name">
+    <br/>
+    <button class="canvasButton" id="new">Create New</button>
+    <button class="canvasButton" id="delete">Delete</button>
   </div>
 </div>
+<div class="drawingListContainer">
+  <h3>My Drawings</h3>
+  <ul id="drawingList">
+  </ul>
+</div>
 <script>
-  var sketchpad; 
-  $(document).ready(function() {
-    sketchpad = new Sketchpad({
-      element: '#sketchpad',
-      width: 500,
-      height: 500,
+  var sketchpadTypeVar = "p1";
+  var sketchpad;
+  var sketchpadIDVar;
+  function initSketchpad(sketchpadObject, sketchpadID, sketchPadType, drawingName) {
+    if (!sketchpadID) {
+      sketchpadIDVar = 0;
+    } else {
+      sketchpadIDVar = sketchpadID;
+    }
+    if (!drawingName) {
+      drawingName = "Untitled";
+    }
+    $("#drawingName").val(drawingName);
+    let width;
+    let height;
+    if (!sketchPadType) {
+      sketchPadType = "p1";
+    }
+    switch(sketchPadType) {
+      case "p1":
+        width = 300;
+        height = 300;
+        sketchpadTypeVar = "p1";
+        break;
+      case "p2":
+        width = 500;
+        height = 500;
+        sketchpadTypeVar = "p2";
+        break;
+      case "p3":
+        width = 800;
+        height = 800;
+        sketchpadTypeVar = "p3";
+        break;
+      default:
+        width = 300;
+        height = 300;
+        sketchpadTypeVar = "p1";
+        break;
+    }
+    if (sketchpadObject) {
+      sketchpadObject = JSON.parse(sketchpadObject);
+      sketchpadObject.element = '#sketchpad';
+      sketchpad = new Sketchpad(sketchpadObject);
+    } else {
+      sketchpad = new Sketchpad({
+        element: '#sketchpad',
+        width: width,
+        height: height,
+      });
+    }
+    $("#p1").on("click", function(event) {
+      $("#sketchpad").remove();
+      $("#sketchPadContainer").append('<canvas id="sketchpad"></canvas>');
+      let oldSketchpad = sketchpad.toObject();
+      oldSketchpad.element = '#sketchpad';
+      oldSketchpad.width = 300;
+      oldSketchpad.height = 300;
+      sketchpad = new Sketchpad(oldSketchpad);
+      sketchpad.penSize = $("#size").val();
+      sketchpad.color = $("#color").val();
+      sketchpadTypeVar = "p1";
+    });
+    $("#p2").on("click", function(event) {
+      $("#sketchpad").remove();
+      $("#sketchPadContainer").append('<canvas id="sketchpad"></canvas>');
+      let oldSketchpad = sketchpad.toObject();
+      oldSketchpad.element = '#sketchpad';
+      oldSketchpad.width = 500;
+      oldSketchpad.height = 500;
+      sketchpad = new Sketchpad(oldSketchpad);
+      sketchpad.penSize = $("#size").val();
+      sketchpad.color = $("#color").val();
+      sketchpadTypeVar = "p2";
+    });
+    $("#p3").on("click", function(event) {
+      $("#sketchpad").remove();
+      $("#sketchPadContainer").append('<canvas id="sketchpad"></canvas>');
+      let oldSketchpad = sketchpad.toObject();
+      oldSketchpad.element = '#sketchpad';
+      oldSketchpad.width = 800;
+      oldSketchpad.height = 800;
+      sketchpad = new Sketchpad(oldSketchpad);
+      sketchpad.penSize = $("#size").val();
+      sketchpad.color = $("#color").val();
+      sketchpadTypeVar = "p3";
     });
     $("#size").on("change", function(event) {
       sketchpad.penSize = $(this).val();
@@ -31,8 +179,8 @@
       $("#sketchPadContainer").append('<canvas id="sketchpad"></canvas>');
       sketchpad = new Sketchpad({
         element: '#sketchpad',
-        width: 500,
-        height: 500,
+        width: width,
+        height: height,
       });
       sketchpad.penSize = $("#size").val();
       sketchpad.color = $("#color").val();
@@ -45,16 +193,164 @@
     });
     $("#animate").on("click", function(event) {
       sketchpad.cancelAnimation();
-      sketchpad.animate(parseInt($("#speed").val()));
+      let speed = $("#speed").val();
+      speed = Math.abs(50 - speed);
+      sketchpad.animate(speed);
     });
+    $("#save").on("click", function(event) {
+      const drawing = sketchpad.toObject();
+      $.ajax({
+        url: "/doodle/save",
+        type: "POST",
+        data: {
+          sketchObject: JSON.stringify(drawing),
+          drawingID: sketchpadIDVar,
+          sketchPadType: sketchpadTypeVar,
+          sketchName: $("#drawingName").val(),
+          _csrf: $("input[name='_csrf']").val()
+        },
+        success: function(data) {
+          if (data.error) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: data.error,
+            });
+          } else {
+            sketchpadIDVar = data.drawingID;
+            if (data.userDrawingIDs) {
+              initDrawingList(JSON.parse(data.userDrawingIDs));
+            }
+            $("#delete").show();
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Drawing Saved',
+            });
+          }
+        },
+        error: function(err) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error Saving Drawing',
+          });
+        }
+      });
+    });
+    $("#new").on("click", function(event) {
+      $("#sketchpad").remove();
+      $("#sketchPadContainer").append('<canvas id="sketchpad"></canvas>');
+      sketchpad = new Sketchpad({
+        element: '#sketchpad',
+        width: 300,
+        height: 300,
+      });
+      sketchpad.penSize = $("#size").val();
+      sketchpad.color = $("#color").val();
+      sketchpadTypeVar = "p1";
+      $("#drawingName").val("Untitled");
+      $("#delete").hide();
+      sketchpadIDVar = 0;
+      $.ajax({
+        url: "/doodle/fetch",
+        type: "GET",
+        success: function(data) {
+          if (data.error) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: data.error,
+            });
+          } else {
+            if (data.userDrawings) {
+              initDrawingList(JSON.parse(data.userDrawings));
+            }
+          }
+        },
+        error: function(err) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error Fetching Drawings',
+          });
+        }
+      });
+    });
+    if (sketchpadIDVar === 0) {
+      $("#delete").hide();
+    } else {
+      $("#delete").show();
+    }
+    $("#delete").on("click", function(event) {
+      $.ajax({
+        url: "/doodle/delete",
+        type: "GET",
+        data: {
+          drawingID: sketchpadIDVar
+        },
+        success: function(data) {
+          if (data.error) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: data.error,
+            });
+          } else {
+            window.location.href = "/doodle";
+          }
+        },
+        error: function(err) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error Deleting Drawing',
+          });
+        }
+      });
+    });
+  }
+  function initDrawingList(sketchpadIDs) {
+    const drawingList = $("#drawingList");
+    drawingList.empty();
+    for (let i = 0; i < sketchpadIDs.length; i++) {
+      const sketchpadID = sketchpadIDs[i].id;
+      const sketchpadName = sketchpadIDs[i].name;
+      const sketchDateChanged = new Date(sketchpadIDs[i].dateChanged).toLocaleTimeString('en-US');
+      drawingList.append(`<li><a href="/doodle?drawingID=${sketchpadID}">${sketchpadName} ${sketchDateChanged}</a></li>`);
+    }
+  }
+  $(document).ready(function() {
+    const sketchpadData = $("#drawingData").data("drawing");
+    const sketchpadIDs = $("#drawingData").data("drawingids");
+    const sketchpadID = $("#drawingData").data("drawingid");
+    if (sketchpadData) {
+      initSketchpad(sketchpadData.sketchObject, sketchpadID, sketchpadData.sketchPadType, sketchpadData.sketchName);
+    } else {
+      initSketchpad();
+    }
+    
+    if (sketchpadIDs && sketchpadIDs.length > 0) {
+      initDrawingList(sketchpadIDs);
+    } else {
+      $("#drawingList").append("<li>No Drawings</li>");
+    }
   });
 </script>
 
 <style>
   .canvasContainer {
     margin: auto;
-    width: 50%;
+    width: 100%;
     height: 50%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .drawingListContainer {
+    margin-top: 50px;
   }
   .canvasButton {
     margin: 5px;
@@ -64,11 +360,30 @@
     padding-bottom: 2px;
   }
   #sketchpad {
-    margin-top: 50%;
+    margin-top: 20%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
-  #penSize {
-    margin-top: 10px;
-    margin-bottom: 10px;
+  #size {
+    width: 400px;
+  }
+  #speed {
+    width: 400px;
+  }
+  #delete {
+    float: right;
+  }
+  #sizeSelection {
+    margin-top: 25px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .sizeButton {
+    width: 100px;
+  }
+  .canvasOptions {
+    margin-left: 100px;
   }
 </style>

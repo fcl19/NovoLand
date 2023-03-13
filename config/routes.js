@@ -37,7 +37,10 @@ module.exports.routes = {
   '/post': {view: 'pages/post'},
   '/post/create': {controller: 'PostsController', action: 'createPost', policy: 'sessionAuth'},
   '/post/fetch': {controller: 'PostsController', action: 'fetchPosts', policy: 'sessionAuth'},
-  '/doodle': {view: 'pages/doodle', policy: 'sessionAuth'},
+  '/doodle': {view: 'pages/doodle', controller: 'UserDrawingsController', action: 'viewDoodlePage', policy: 'sessionAuth'},
+  '/doodle/save': {controller: 'UserDrawingsController', action: 'saveUserDrawing', policy: 'sessionAuth'},
+  '/doodle/delete': {controller: 'UserDrawingsController', action: 'deleteUserDrawing', policy: 'sessionAuth'},
+  '/doodle/fetch': {controller: 'UserDrawingsController', action: 'getUserDrawingList', policy: 'sessionAuth'},
 
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
