@@ -78,6 +78,7 @@
       <div>
           <h3> <b>${post[i].userId.firstName + " " + post[i].userId.lastName } </b> </h3>
           <h6> ${new Date(post[i].createdAt).toLocaleString('en-US') }</h6>
+          <a id="userProfileLink" class="profileName" href="/profile?accountId=${post[i].userId}">${post[i].userId.firstName + " " + post[i].userId.lastName}</a>
       </div>
       <p>  
         ${post[i].body}
