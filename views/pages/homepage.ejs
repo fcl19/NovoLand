@@ -39,9 +39,9 @@
 </nav>
 
 
-<div style=" margin-top: 3%; margin-left: 150px; margin-right: 150px; display:inline-block; width: 100%;">
+<div style=" margin-top: 3%; margin-left: 15%; margin-right: 15%; display:inline-block; width: 100%;">
   <div style="width: 30%; height: auto; float: left; display:inline-block;">
-      <h1> Recent Posts</h1>
+      <h1 class = "subheadLightBlue"> Recent Posts</h1>
   </div>
   <div style="width: 70%; height: auto; display:inline-block;">
       <div>
@@ -79,6 +79,7 @@
       <div>
           <h3> <b>${post[i].userId.firstName + " " + post[i].userId.lastName } </b> </h3>
           <h6> ${new Date(post[i].createdAt).toLocaleString('en-US') }</h6>
+
       </div>
       <p>  
         ${post[i].body}
