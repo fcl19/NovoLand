@@ -128,7 +128,7 @@
     $.ajax({
       url:  '/scheduler/newEvent',
       type: 'GET',
-      data: {body: eventName},
+      data: {subject: eventName},
       success: function(result) {
           console.log("success");
           if(result.error)
