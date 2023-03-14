@@ -30,6 +30,7 @@ module.exports.routes = {
   '/events': {view: 'pages/events', policy: 'sessionAuth'},
   '/sarasota': {view: 'pages/sarasota', policy: 'sessionAuth'},
   '/scheduler': {view: 'pages/scheduler', policy: 'sessionAuth'},
+  '/orientation': {view: 'pages/orientation', policy: 'sessionAuth'},
   '/new_event': {view: 'pages/new_event', policy: 'sessionAuth'},
   '/leaderboard': {view: 'pages/leaderboard', controller: 'LeaderboardController', action: 'viewLeaderboard', policy: 'sessionAuth'},
   '/profile': {view: 'pages/profile', policy: 'sessionAuth', controller: 'UserController', action: 'getAccount'}, // Profile page
