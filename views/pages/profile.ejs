@@ -1,39 +1,40 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">NuPath</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/messages">Messages</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            Information
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item " href="/residence_halls">Residence Halls</a></li>
-            <li><a class="dropdown-item" href="https://www.ncf.edu/life-at-new/where-to-eat/">On-campus Dining</a></li>
-            <li><a class="dropdown-item" href="/supplies">Supplies</a></li>
-            <li><a class="dropdown-item" href="/events">Campus Events</a></li>
-            <li><a class="dropdown-item" href="/sarasota">Sarasota</a></li>
-            <li><a class = "dropdown-item" href="/scheduler">Scheduler</a></li>
-          </ul>
-  
-        </li>
-          <li class="nav-item">
-            <a class="nav-link " href="/leaderboard">Leaderboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/profile">Profile</a>
-          </li>    
+  <a class="navbar-brand" href="#">NuPath</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/messages">Messages</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          Information
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item " href="/residence_halls">Residence Halls</a></li>
+          <li><a class="dropdown-item" href="https://www.ncf.edu/life-at-new/where-to-eat/">On-campus Dining</a></li>
+          <li><a class="dropdown-item" href="/supplies">Supplies</a></li>
+          <li><a class="dropdown-item" href="/events">Campus Events</a></li>
+          <li><a class="dropdown-item" href="/sarasota">Sarasota</a></li>
+          <li><a class = "dropdown-item" href="/scheduler">Scheduler</a></li>
         </ul>
-      </div>  
-  </nav>
+
+      </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/profile">Profile</a>
+        </li>    
+      </ul>
+    </div>  
+</nav>
+
 
 <div id="accountInfo" data-account="<%=account%>"></div> <!-- data-account attribute holds account info for page to use -->
 <br/>
@@ -67,6 +68,7 @@
   <a href="/edit_profile_pic">
   <button id="newProfilePic" class="profileButton">Edit Profile Picture</button></a>
 </div>
+
 
 <script>
   function initPage() { //function to initialize page
@@ -131,95 +133,97 @@
           }
         });
       });
-      $("#logout").click(function() { //logout button
-        $.ajax({ //send ajax request to logout
-          url: "/user/logout",
-          type: "GET",
-          success: function(data) { //on success
-            if (data.success) {
-              window.location.href = "/"; //redirect to home page
-            } else {
-              Swal.fire({ //show error alert
-                title: "Error",
-                text: data.error,
-                icon: "error",
-                confirmButtonText: "Ok"
-              })
-            }
-          },
-          error: function(err) { //on error
+    $("#logout").click(function() { //logout button
+      $.ajax({ //send ajax request to logout
+        url: "/user/logout",
+        type: "GET",
+        success: function(data) { //on success
+          if (data.success) {
+            window.location.href = "/"; //redirect to home page
+          } else {
             Swal.fire({ //show error alert
               title: "Error",
-              text: "An error occurred while trying to logout.",
+              text: data.error,
               icon: "error",
               confirmButtonText: "Ok"
             })
           }
-        });
+        },
+        error: function(err) { //on error
+          Swal.fire({ //show error alert
+            title: "Error",
+            text: "An error occurred while trying to logout.",
+            icon: "error",
+            confirmButtonText: "Ok"
+          })
+        }
       });
-    } else {
-      $("#profileHeader").text(`${account.firstName} ${account.lastName}'s Profile`); //change header to "First Last's Profile"
-      $(".selfEditButtons").hide(); //hide edit and logout buttons
-    }
-    $("#username").text(account.username); //set username
-    $("#firstName").text(account.firstName); //set first name
-    $("#lastName").text(account.lastName); //set last name
-    $("#email").text(account.email); //set email
-    $("#interests").text(account.interests); //set interests
-    for (let task = 0; task < account.tasks.length; task += 1) { //for each task completed
-      //$("#tasksCompletedList").append(`<label id='tasksCompletedTitle'>${task === 0 ? "<b>Tasks Completed:</b>" : ""}</label>`);
-      $("#tasksCompletedList").append(`<div id='tasksCompleted' class="task" title="${account.tasks[task].name}" name='tasksCompleted' class='userInfo'>${account.tasks[task].taskElement}</div>`);
-    }  
+    });
+  } else {
+    $("#profileHeader").text(`${account.firstName} ${account.lastName}'s Profile`); //change header to "First Last's Profile"
+    $(".selfEditButtons").hide(); //hide edit and logout buttons
+    $("#newProfilePic").hide();//hide edit profile pic button
+
   }
-  initPage(); //call function to initialize page
+  $("#username").text(account.username); //set username
+  $("#firstName").text(account.firstName); //set first name
+  $("#lastName").text(account.lastName); //set last name
+  $("#email").text(account.email); //set email
+  $("#interests").text(account.interests); //set interests
+  for (let task = 0; task < account.tasks.length; task += 1) { //for each task completed
+    //$("#tasksCompletedList").append(`<label id='tasksCompletedTitle'>${task === 0 ? "<b>Tasks Completed:</b>" : ""}</label>`);
+    $("#tasksCompletedList").append(`<div id='tasksCompleted' class="task" title="${account.tasks[task].name}" name='tasksCompleted' class='userInfo'>${account.tasks[task].taskElement}</div>`);
+  }  
+}
+initPage(); //call function to initialize page
 </script>
 
-<style>
-  #profileHeader {
-    margin: auto;
-    width: 70%;
-    padding: 10px;
-  }
-  .accountContainer {
-    margin: auto;
-    width: 60%;
-    padding: 10px;
-  }
-  .userInfo {
-    display: inline-block;
-    margin-left: 20px;
-  }
-  label {
-    width: 160px;
-    text-align: right;
-  }
-  #username {
-    margin-left: 20px;
-    width: 35%;
-  }
-  #tasksCompletedTitle {
-    width: 160px;
-    text-align: right;
-  }
-  .selfEditButtons {
-    display: inline-block;
-  }
-  .editButton {
-    margin-left: 400px;
-  }
 
-  .profileButton{
-    margin-left: 453px;
-  }
-  .task {
-    display: inline-block;
-    margin-left: 20px;
-    width: 5%;
-  }
-  #tasksCompletedList {
-    display: inline-block;
-  }
+<style>
+#profileHeader {
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+}
+.accountContainer {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+.userInfo {
+  display: inline-block;
+  margin-left: 20px;
+}
+label {
+  width: 160px;
+  text-align: right;
+}
+#username {
+  margin-left: 20px;
+  width: 35%;
+}
+#tasksCompletedTitle {
+  width: 160px;
+  text-align: right;
+}
+.selfEditButtons {
+  display: inline-block;
+}
+.editButton {
+  margin-left: 400px;
+}
+
+
+.profileButton{
+  margin-left: 453px;
+}
+.task {
+  display: inline-block;
+  margin-left: 20px;
+  width: 5%;
+}
+#tasksCompletedList {
+  display: inline-block;
+}
 </style>
 
-
-  
