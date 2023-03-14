@@ -3,12 +3,13 @@ module.exports={
     try {
       const userID = req.session.userId;
       const supplyID = req.param('supplyID');
-      const checked = req.param('checked');
+      const checked = req.param('checked') === "true";
       if (!userID) { // Check if user is logged in
         return res.send({
           error: 'User not logged in'
         });
       }
+      console.log(checked)
       if (!supplyID || typeof checked !== 'boolean') { // Check if supplyID and checked are provided
         return res.send({
           error: 'Missing required params'
