@@ -9,10 +9,10 @@
           <a class="nav-link" aria-current="page" href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="/messages">Messages</a>
+          <a class="nav-link " href="/messages">Messages</a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" id="navbardrop" data-toggle="dropdown">
             Information
           </a>
           <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -93,14 +93,14 @@
                   <input type="date" id="eventDate" name="eventDate">
                 </div>
                 
-                <label for="submitEventDate"></label>
+                <button type="submit" class="endButton" onclick="dateFormdata()">Submit</button>
               </div>
           </div>
 
           <br>
           <br>
           <h3>Today's Events</h3>
-          <div id="eventData" data-post="<%=eventdata%>">
+         
           
           
           
@@ -234,9 +234,38 @@ header .current-date{
 }
        
 </style>
+<script>
+  function dateFormdata() 
+  {
+    var eventDates = document.getElementById("eventDate").value;
+    //need to write the route page for this
+    $.ajax({
+      url:  '/scheduler/fetchEvent',
+      type: 'GET',
+      data: {startDate: eventDate},
+      success: function(result) {
+          console.log("success");
+          if(result.error)
+          {
+            Swal.fire({ //show error alert
+            title: "Error",
+            text: result.error,
+            icon: "error"
+          });
+            console.log("error");
+          }
+          else
+          {
+            window.location.href = "/scheduler";
+          }
+      }
+    });
+  }
+  </script>
+
 
 <script>
-  $(document).ready(() => {console.log($("#eventData").data('event')); 
+ // $(document).ready(() => {console.log($("#eventData").data('event'))});
     
   $("#createEvent").on("click", () => {
     window.location.href = "/new_event";

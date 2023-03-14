@@ -89,8 +89,9 @@
 
       <!--cancel and submit event buttons-->
       <br>
-      <button type="submit" class="endButton" onclick="eventFormdata()">Submit</button>
       <button type="button" class="endButton" onclick="closeForm()">Cancel</button>
+      <button type="submit" class="endButton" onclick="eventFormdata()">Submit</button>
+      
       <br>
 </form>
 
@@ -118,6 +119,11 @@
   function eventFormdata() 
   {
     var eventName = document.getElementById("eventName").value;
+    var eventDate = document.getElementById("newEventDate").value;
+    var allDayEvent = document.getElementById("allDayEvent").value;
+    var startTime = document.getElementById("startTime").value;
+    var endTime = document.getElementById("endTime").value;
+    //get recoccuring events from radio buttons
 
     $.ajax({
       url:  '/scheduler/newEvent',
