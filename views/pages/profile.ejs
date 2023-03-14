@@ -63,6 +63,8 @@
   <button id="saveAccountValues" class="editButton">Save Changes</button> <!-- button to save changes -->
 </div>
 
+
+
 <script>
   function initPage() { //function to initialize page
     $("#saveAccountValues").hide(); //hide save button
@@ -181,26 +183,30 @@
   }
   .userInfo {
     display: inline-block;
-    margin-left: 20px;
+    margin-left: 5%;
+    width: 40%;
   }
   label {
-    width: 160px;
-    text-align: right;
+    width: 40%;
+    margin-right: 10%
+    /*text-align: right;*/
   }
   #username {
-    margin-left: 20px;
-    width: 35%;
+    margin-left: 5%;
+    width: 40%;
   }
   #tasksCompletedTitle {
-    width: 160px;
-    text-align: right;
+    width: 40%;
+    /*text-align: right;*/
   }
   .selfEditButtons {
     display: inline-block;
   }
-  .editButton {
-    margin-left: 400px;
+  .editButton, #logout {
+    margin-top: 5%;
+    margin-left: 1%;
   }
+
   .task {
     display: inline-block;
     margin-left: 20px;
