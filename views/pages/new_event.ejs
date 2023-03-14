@@ -89,7 +89,7 @@
 
       <!--cancel and submit event buttons-->
       <br>
-      <button type="submit" class="endButton">Submit</button>
+      <button type="submit" class="endButton" onclick="eventFormdata()">Submit</button>
       <button type="button" class="endButton" onclick="closeForm()">Cancel</button>
       <br>
 </form>
@@ -113,3 +113,32 @@
     }
   });
 </script>
+
+<script>
+  function eventFormdata() 
+  {
+    var eventName = document.getElementById("eventName").value;
+
+    $.ajax({
+      url:  '/scheduler/newEvent',
+      type: 'GET',
+      data: {body: eventName},
+      success: function(result) {
+          console.log("success");
+          if(result.error)
+          {
+            Swal.fire({ //show error alert
+            title: "Error",
+            text: result.error,
+            icon: "error"
+          });
+            console.log("error");
+          }
+          else
+          {
+            window.location.href = "/scheduler";
+          }
+      }
+    });
+  }
+  </script>
