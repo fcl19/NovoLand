@@ -38,7 +38,7 @@
 
 <div id="accountInfo" data-account="<%=account%>"></div> <!-- data-account attribute holds account info for page to use -->
 <br/>
-<h2 id="profileHeader">Account Information</h2> <!-- header for page -->
+<div id="profileHeaderContainer"><img id="profileIcon" src="images/pictures/ppIcon.png" alt="profile icon"><h2 id="profileHeader">Account Information</h2></div> <!-- header for page -->
 <div class="accountContainer"> <!-- container for account info -->
 
   <br/>
@@ -165,6 +165,7 @@
     $("#newProfilePic").hide();//hide edit profile pic button
 
   }
+  $("#profileIcon").attr("src", account.userProfileImage); //set profile picture
   $("#username").text(account.username); //set username
   $("#firstName").text(account.firstName); //set first name
   $("#lastName").text(account.lastName); //set last name
@@ -181,9 +182,23 @@ initPage(); //call function to initialize page
 
 <style>
 #profileHeader {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 5%;
+}
+#profileIcon {
+  display: block;
+  width: 10%;
+  height: 10%;
+}
+#profileHeaderContainer {
   margin: auto;
   width: 70%;
   padding: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
 }
 .accountContainer {
   margin: auto;

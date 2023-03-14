@@ -35,6 +35,8 @@
       </div>  
   </nav>
 
+<div id="userProfileImage" data-profileimage="<%=profileimage%>"></div>
+
 <div class="catPicsContainer">
     <p>Choose a profile picture: </p>
     <div class="catPics">
@@ -91,43 +93,48 @@
   </script>
 
 <script>
-     $("#saveProfilePic").click(function() { //save button
-        var profileIconImg = document.getElementById('profileIcon');
-
-        $.ajax({ //send ajax request to save changes
-          url: "/profile/editPicture", //edit user route
-          type: "GET", //get request
-          data: { //data to send
-            profilePic: profileIconImg
-          },
-          success: function(data) { //on success
-            if (data.success) { //if success
-
-              Swal.fire({ //show success alert
-                title: "Success",
-                text: "Your changes have been saved.",
-                icon: "success",
-                confirmButtonText: "Ok"
-              });
-            } else {
-              Swal.fire({ //show error alert
-                title: "Error",
-                text: data.error,
-                icon: "error",
-                confirmButtonText: "Ok"
-              });
-            }
-          },
-          error: function(err) { //on error
+  var profileImage = "images/pictures/ppIcon.png";
+  $(document).ready(function() {
+    let profileIcon = document.getElementById('profileIcon');
+    profileImage = $("#userProfileImage").data("profileimage");
+    profileIcon.src = profileImage;
+  });
+    $("#saveBtn").click(function() { //save button
+      var profileIconImg = document.getElementById('profileIcon');
+      $.ajax({ //send ajax request to save changes
+        url: "/profile/editPicture", //edit user route
+        type: "GET", //get request
+        data: { //data to send
+          profilePic: profileIconImg.src
+        },
+        success: function(data) { //on success
+          if (data.success) { //if success
+            Swal.fire({ //show success alert
+              title: "Success",
+              text: "Your changes have been saved.",
+              icon: "success",
+              confirmButtonText: "Ok"
+            }).then((result) => {
+                window.location.href = "/profile";
+            });
+          } else {
             Swal.fire({ //show error alert
               title: "Error",
-              text: "An error occurred while trying to save your changes.",
+              text: data.error,
               icon: "error",
               confirmButtonText: "Ok"
-            })
+            });
           }
-        });
+        },
+        error: function(err) { //on error
+          Swal.fire({ //show error alert
+            title: "Error",
+            text: "An error occurred while trying to save your changes.",
+            icon: "error",
+            confirmButtonText: "Ok"
+          })
+        }
       });
-   
-    </script>
+    });
+</script>
 

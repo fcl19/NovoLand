@@ -8,8 +8,6 @@
  * https://sailsjs.com/anatomy/config/routes-js
  */
 
-const profilePictureController = require("../api/controllers/profilePictureController");
-
 module.exports.routes = {
 
   //  ╦ ╦╔═╗╔╗ ╔═╗╔═╗╔═╗╔═╗╔═╗
@@ -23,8 +21,7 @@ module.exports.routes = {
   '/user/logout': 'UserController.logout', // Logout action
   '/user/register': 'UserController.createAccount', // Register action
   '/user/edit': {controller: 'UserController', action: 'editAccount', policy: 'sessionAuth'}, // Edit account action
-  '/edit_profile_pic':{view: 'pages/edit_profile_pic'},
-  '/profile/editPicture':{controller: 'profilePictureController', action: 'saveProfilePic', policy: 'sessionAuth'},
+  '/profile/editPicture':{controller: 'ProfilePictureController', action: 'saveProfilePic', policy: 'sessionAuth'},
   '/messages': {view: 'pages/messages', policy: 'sessionAuth' },
   '/new_post': {view: 'pages/new_post', policy: 'sessionAuth'},
   '/residence_halls': {view: 'pages/residence_halls', policy: 'sessionAuth'},
@@ -36,7 +33,7 @@ module.exports.routes = {
   '/new_event': {view: 'pages/new_event', policy: 'sessionAuth'},
   '/leaderboard': {view: 'pages/leaderboard', controller: 'LeaderboardController', action: 'viewLeaderboard', policy: 'sessionAuth'},
   '/profile': {view: 'pages/profile', policy: 'sessionAuth', controller: 'UserController', action: 'getAccount'}, // Profile page
-  '/edit_profile_pic': {view: 'pages/edit_profile_pic', policy: 'sessionAuth'},
+  '/edit_profile_pic': {view: 'pages/edit_profile_pic', controller: 'ProfilePictureController', action: 'viewProfilePic', policy: 'sessionAuth'},
   '/tasks/complete': {controller: 'TaskController', action: 'completeTask', policy: 'sessionAuth'}, // Complete task action
   '/leaderboard/fetch': {controller: 'LeaderboardController', action: 'fetchLeaderboard', policy: 'sessionAuth'}, // Fetch leaderboard action
   '/new_post': {view: 'pages/new_post'},
