@@ -32,6 +32,7 @@ module.exports.routes = {
   '/new_event': {view: 'pages/new_event', policy: 'sessionAuth'},
   '/leaderboard': {view: 'pages/leaderboard', controller: 'LeaderboardController', action: 'viewLeaderboard', policy: 'sessionAuth'},
   '/profile': {view: 'pages/profile', policy: 'sessionAuth', controller: 'UserController', action: 'getAccount'}, // Profile page
+  '/edit_profile_pic': {view: 'pages/edit_profile_pic', policy: 'sessionAuth'},
   '/tasks/complete': {controller: 'TaskController', action: 'completeTask', policy: 'sessionAuth'}, // Complete task action
   '/leaderboard/fetch': {controller: 'LeaderboardController', action: 'fetchLeaderboard', policy: 'sessionAuth'}, // Fetch leaderboard action
   '/supplies/changeCheck': {controller: 'SuppliesController', action: 'changeCheckbox', policy: 'sessionAuth'}, //check or uncheck supplies 

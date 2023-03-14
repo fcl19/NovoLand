@@ -1,173 +1,188 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">NuPath</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/messages">Messages</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            Information
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item " href="/residence_halls">Residence Halls</a></li>
-            <li><a class="dropdown-item" href="https://www.ncf.edu/life-at-new/where-to-eat/">On-campus Dining</a></li>
-            <li><a class="dropdown-item" href="/supplies">Supplies</a></li>
-            <li><a class="dropdown-item" href="/events">Campus Events</a></li>
-            <li><a class="dropdown-item" href="/sarasota">Sarasota</a></li>
-            <li><a class = "dropdown-item" href="/scheduler">Scheduler</a></li>
-          </ul>
-  
-        </li>
-          <li class="nav-item">
-            <a class="nav-link " href="/leaderboard">Leaderboard</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="/profile">Profile</a>
-          </li>    
+  <a class="navbar-brand" href="#">NuPath</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/messages">Messages</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+          Information
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li><a class="dropdown-item " href="/residence_halls">Residence Halls</a></li>
+          <li><a class="dropdown-item" href="https://www.ncf.edu/life-at-new/where-to-eat/">On-campus Dining</a></li>
+          <li><a class="dropdown-item" href="/supplies">Supplies</a></li>
+          <li><a class="dropdown-item" href="/events">Campus Events</a></li>
+          <li><a class="dropdown-item" href="/sarasota">Sarasota</a></li>
+          <li><a class = "dropdown-item" href="/scheduler">Scheduler</a></li>
         </ul>
-      </div>  
-  </nav>
+
+      </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/leaderboard">Leaderboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="/profile">Profile</a>
+        </li>    
+      </ul>
+    </div>  
+</nav>
+
 
 <div id="accountInfo" data-account="<%=account%>"></div> <!-- data-account attribute holds account info for page to use -->
 <br/>
 <h2 id="profileHeader">Account Information</h2> <!-- header for page -->
 <div class="accountContainer"> <!-- container for account info -->
-  <br/>
-  <label for="username"><b>Username:</b></label> <!-- label for username -->
-  <div id="username" name="username" class="userInfo"></div> <!-- div to hold username -->
-  <br/>
-  <label for="firstName"><b>First Name:</b></label> <!-- label for first name -->
-  <div id="firstName" name="firstName" class="userInfo"></div> <!-- div to hold first name -->
-  <br/>
-  <label for="lastName"><b>Last Name:</b></label> <!-- label for last name -->
-  <div id="lastName" name="lastName" class="userInfo"></div> <!-- div to hold last name -->
-  <br/>
-  <label for="email"><b>Email:</b></label> <!-- label for email -->
-  <div id="email" name="email" class="userInfo"></div> <!-- div to hold email -->
-  <br/>
-  <label for="interests"><b>Interests:</b></label> <!-- label for interests -->
-  <div id="interests" name="interests" class="userInfo"></div> <!-- div to hold interests -->
-  <br/>
-  <label for="tasksCompleted"><b>Tasks Completed:</b></label> <!-- label for tasks completed -->
-  <div id="tasksCompletedList"> <!-- div to hold tasks completed if any -->
-  </div>
-  <br/><br/><br/>
-  <div class="selfEditButtons"><button id="logout">Logout</button><button id="editAccountValues" class="editButton">Edit Account</button></div> <!-- div to hold edit and logout buttons -->
-  <button id="saveAccountValues" class="editButton">Save Changes</button> <!-- button to save changes -->
+
+
+<br/>
+<label for="username"><b>Username:</b></label> <!-- label for username -->
+<div id="username" name="username" class="userInfo"></div> <!-- div to hold username -->
+<br/>
+<label for="firstName"><b>First Name:</b></label> <!-- label for first name -->
+<div id="firstName" name="firstName" class="userInfo"></div> <!-- div to hold first name -->
+<br/>
+<label for="lastName"><b>Last Name:</b></label> <!-- label for last name -->
+<div id="lastName" name="lastName" class="userInfo"></div> <!-- div to hold last name -->
+<br/>
+<label for="email"><b>Email:</b></label> <!-- label for email -->
+<div id="email" name="email" class="userInfo"></div> <!-- div to hold email -->
+<br/>
+<label for="interests"><b>Interests:</b></label> <!-- label for interests -->
+<div id="interests" name="interests" class="userInfo"></div> <!-- div to hold interests -->
+<br/>
+<label for="tasksCompleted"><b>Tasks Completed:</b></label> <!-- label for tasks completed -->
+<div id="tasksCompletedList"> <!-- div to hold tasks completed if any -->
+</div>
+<br/><br/><br/>
+<div class="selfEditButtons"><button id="logout">Logout</button><button id="editAccountValues" class="editButton">Edit Account</button></div> <!-- div to hold edit and logout buttons -->
+<button id="saveAccountValues" class="editButton">Save Changes</button> <!-- button to save changes -->
+<br>
+<br>
+<a href="/edit_profile_pic">
+<button id="newProfilePic" class="profileButton">Edit Profile Picture</button></a>
 </div>
 
 
-
 <script>
-  function initPage() { //function to initialize page
-    $("#saveAccountValues").hide(); //hide save button
-    let account = $("#accountInfo").data("account"); //get account info from data-account attribute
-    if (account.isSelfEdit) { //if user is viewing their own profile
-      $("#profileHeader").text("My Profile"); //change header to "My Profile"
-      $("#editAccountValues").click(function() { //edit button
-        $("#firstName").html(`<input type="text" id="firstNameInput" name="firstNameInput" value="${account.firstName}">`); //change to input
-        $("#lastName").html(`<input type="text" id="lastNameInput" name="lastNameInput" value="${account.lastName}">`); //change to input
-        $("#email").html(`<input type="text" id="emailInput" name="emailInput" value="${account.email}">`); //change to input
-        $("#interests").html(`<input type="text" id="interestsInput" name="interestsInput" value="${account.interests}">`); //change to input
-        $("#editAccountValues").hide(); //hide edit button
-        $("#saveAccountValues").show(); //show save button
-      });
-      $("#saveAccountValues").click(function() { //save button
-        let firstName = $("#firstNameInput").val(); //get new first name
-        let lastName = $("#lastNameInput").val(); //get new last name
-        let email = $("#emailInput").val(); //get new email
-        let interests = $("#interestsInput").val(); //get new interests
-        $.ajax({ //send ajax request to save changes
-          url: "/user/edit", //edit user route
-          type: "GET", //get request
-          data: { //data to send
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            interests: interests
-          },
-          success: function(data) { //on success
-            if (data.success) { //if success
-              $("#firstName").text(firstName); //change first name
-              $("#lastName").text(lastName); //change last name
-              $("#email").text(email); //change email
-              $("#interests").text(interests); //change interests
-              $("#editAccountValues").show(); //show edit button
-              $("#saveAccountValues").hide(); //hide save button
-              Swal.fire({ //show success alert
-                title: "Success",
-                text: "Your changes have been saved.",
-                icon: "success",
-                confirmButtonText: "Ok"
-              });
-            } else {
-              Swal.fire({ //show error alert
-                title: "Error",
-                text: data.error,
-                icon: "error",
-                confirmButtonText: "Ok"
-              });
-            }
-          },
-          error: function(err) { //on error
+function initPage() { //function to initialize page
+  $("#saveAccountValues").hide(); //hide save button
+  
+  $("#newProfilePic").on("click", () => { // When the register button is clicked
+        window.location.href = "/edit_profile_pic"; // Redirect to the register page
+    });
+ 
+  let account = $("#accountInfo").data("account"); //get account info from data-account attribute
+  if (account.isSelfEdit) { //if user is viewing their own profile
+    $("#profileHeader").text("My Profile"); //change header to "My Profile"
+    $("#editAccountValues").click(function() { //edit button
+      $("#firstName").html(`<input type="text" id="firstNameInput" name="firstNameInput" value="${account.firstName}">`); //change to input
+      $("#lastName").html(`<input type="text" id="lastNameInput" name="lastNameInput" value="${account.lastName}">`); //change to input
+      $("#email").html(`<input type="text" id="emailInput" name="emailInput" value="${account.email}">`); //change to input
+      $("#interests").html(`<input type="text" id="interestsInput" name="interestsInput" value="${account.interests}">`); //change to input
+      $("#editAccountValues").hide(); //hide edit button
+      $("#newProfilePic").hide(); //hide edit profile picture button
+      $("#saveAccountValues").show(); //show save button
+    });
+    $("#saveAccountValues").click(function() { //save button
+      let firstName = $("#firstNameInput").val(); //get new first name
+      let lastName = $("#lastNameInput").val(); //get new last name
+      let email = $("#emailInput").val(); //get new email
+      let interests = $("#interestsInput").val(); //get new interests
+      $.ajax({ //send ajax request to save changes
+        url: "/user/edit", //edit user route
+        type: "GET", //get request
+        data: { //data to send
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          interests: interests
+        },
+        success: function(data) { //on success
+          if (data.success) { //if success
+            $("#firstName").text(firstName); //change first name
+            $("#lastName").text(lastName); //change last name
+            $("#email").text(email); //change email
+            $("#interests").text(interests); //change interests
+            $("#editAccountValues").show(); //show edit button
+            $("#saveAccountValues").hide(); //hide save button
+            Swal.fire({ //show success alert
+              title: "Success",
+              text: "Your changes have been saved.",
+              icon: "success",
+              confirmButtonText: "Ok"
+            });
+          } else {
             Swal.fire({ //show error alert
               title: "Error",
-              text: "An error occurred while trying to save your changes.",
+              text: data.error,
+              icon: "error",
+              confirmButtonText: "Ok"
+            });
+          }
+        },
+        error: function(err) { //on error
+          Swal.fire({ //show error alert
+            title: "Error",
+            text: "An error occurred while trying to save your changes.",
+            icon: "error",
+            confirmButtonText: "Ok"
+          })
+        }
+      });
+    });
+    $("#logout").click(function() { //logout button
+      $.ajax({ //send ajax request to logout
+        url: "/user/logout",
+        type: "GET",
+        success: function(data) { //on success
+          if (data.success) {
+            window.location.href = "/"; //redirect to home page
+          } else {
+            Swal.fire({ //show error alert
+              title: "Error",
+              text: data.error,
               icon: "error",
               confirmButtonText: "Ok"
             })
           }
-        });
+        },
+        error: function(err) { //on error
+          Swal.fire({ //show error alert
+            title: "Error",
+            text: "An error occurred while trying to logout.",
+            icon: "error",
+            confirmButtonText: "Ok"
+          })
+        }
       });
-      $("#logout").click(function() { //logout button
-        $.ajax({ //send ajax request to logout
-          url: "/user/logout",
-          type: "GET",
-          success: function(data) { //on success
-            if (data.success) {
-              window.location.href = "/"; //redirect to home page
-            } else {
-              Swal.fire({ //show error alert
-                title: "Error",
-                text: data.error,
-                icon: "error",
-                confirmButtonText: "Ok"
-              })
-            }
-          },
-          error: function(err) { //on error
-            Swal.fire({ //show error alert
-              title: "Error",
-              text: "An error occurred while trying to logout.",
-              icon: "error",
-              confirmButtonText: "Ok"
-            })
-          }
-        });
-      });
-    } else {
-      $("#profileHeader").text(`${account.firstName} ${account.lastName}'s Profile`); //change header to "First Last's Profile"
-      $(".selfEditButtons").hide(); //hide edit and logout buttons
-    }
-    $("#username").text(account.username); //set username
-    $("#firstName").text(account.firstName); //set first name
-    $("#lastName").text(account.lastName); //set last name
-    $("#email").text(account.email); //set email
-    $("#interests").text(account.interests); //set interests
-    for (let task = 0; task < account.tasks.length; task += 1) { //for each task completed
-      //$("#tasksCompletedList").append(`<label id='tasksCompletedTitle'>${task === 0 ? "<b>Tasks Completed:</b>" : ""}</label>`);
-      $("#tasksCompletedList").append(`<div id='tasksCompleted' class="task" title="${account.tasks[task].name}" name='tasksCompleted' class='userInfo'>${account.tasks[task].taskElement}</div>`);
-    }  
+    });
+  } else {
+    $("#profileHeader").text(`${account.firstName} ${account.lastName}'s Profile`); //change header to "First Last's Profile"
+    $(".selfEditButtons").hide(); //hide edit and logout buttons
+    $("#newProfilePic").hide();//hide edit profile pic button
+
   }
-  initPage(); //call function to initialize page
+  $("#username").text(account.username); //set username
+  $("#firstName").text(account.firstName); //set first name
+  $("#lastName").text(account.lastName); //set last name
+  $("#email").text(account.email); //set email
+  $("#interests").text(account.interests); //set interests
+  for (let task = 0; task < account.tasks.length; task += 1) { //for each task completed
+    //$("#tasksCompletedList").append(`<label id='tasksCompletedTitle'>${task === 0 ? "<b>Tasks Completed:</b>" : ""}</label>`);
+    $("#tasksCompletedList").append(`<div id='tasksCompleted' class="task" title="${account.tasks[task].name}" name='tasksCompleted' class='userInfo'>${account.tasks[task].taskElement}</div>`);
+  }  
+}
+initPage(); //call function to initialize page
 </script>
+
 
 <style>
   #profileHeader {
@@ -216,60 +231,4 @@
     display: inline-block;
   }
 </style>
-
-
-  <div class="catPicsContainer">
-    <p>Choose a profile picture: </p>
-    <div class="catPics">
-        <img id="catPic1" src="images/pictures/cat1.jpg" alt="cat picture 1" style="width:30%">
-        <img id="catPic2" src="images/pictures/cat2.jfif" alt="cat picture 2" style="width:30%">
-        <img id="catPic3" src="images/pictures/cat3.jpg" alt="cat picture 3" style="width:30%">
-        <img id="catPic4" src="images/pictures/cat4.webp" alt="cat picture 4" style="width:30%">
-        <img id="catPic5" src="images/pictures/cat5.jpg" alt="cat picture 5" style="width:30%">
-        <img id="catPic6" src="images/pictures/cat6.jpg" alt="cat picture 6" style="width:30%">
-    </div>
-    <hr>
-
-    <div>
-        <p> Profile Picture: (Test Purposes)</p>
-        <img id="profileIcon" src="images/pictures/ppIcon.png" alt="profile icon" style="width:30%">
-    </div>
-    <br>
-    <button id="resetBtn">Reset</button>
-    <button id="saveBtn">Save</button>
-  </div>
-
-  <script>
-      var profileIconImg = document.getElementById('profileIcon')
-
-      catPic1.onclick = function(){
-          profileIconImg.src = "images/pictures/cat1.jpg";
-      }
-
-      catPic2.onclick = function(){
-          profileIconImg.src = "images/pictures/cat2.jfif";
-      }
-
-      catPic3.onclick = function(){
-          profileIconImg.src = "images/pictures/cat3.jpg";
-      }
-
-      catPic4.onclick = function(){
-          profileIconImg.src = "images/pictures/cat4.webp";
-      }
-
-      catPic5.onclick = function(){
-          profileIconImg.src = "images/pictures/cat5.jpg";
-      }
-
-      catPic6.onclick = function(){
-          profileIconImg.src = "images/pictures/cat6.jpg";
-      }
-
-      resetBtn.onclick = function(){
-          profileIconImg.src = "images/pictures/ppIcon.png";
-      }
-
-      
-  </script>
 
