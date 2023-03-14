@@ -1,15 +1,15 @@
 module.exports = {
-    attributes: {
-      suppliesID: {
-        model: 'supplies'
-      },
-      userID: {
-        model: 'users'
-      },
-      checked:{
-          type: 'boolean',
-          defaultsTo: false,  
-      }
+  attributes: {
+    suppliesID: {
+      model: 'supplies'
+    },
+    userID: {
+      model: 'users'
+    },
+    checked:{
+      type: 'boolean',
+      defaultsTo: false,
     }
-  };
-  
+  }
+};
+

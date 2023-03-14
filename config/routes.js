@@ -25,7 +25,7 @@ module.exports.routes = {
   '/new_post': {view: 'pages/new_post', policy: 'sessionAuth'},
   '/residence_halls': {view: 'pages/residence_halls', policy: 'sessionAuth'},
   '/dining': {view: 'pages/dining', policy: 'sessionAuth'},
-  '/supplies': {view: 'pages/supplies', policy: 'sessionAuth'},
+  '/supplies': {view: 'pages/supplies', controller: 'SuppliesController', action: 'viewSupplyPage', policy: 'sessionAuth'},
   '/events': {view: 'pages/events', policy: 'sessionAuth'},
   '/sarasota': {view: 'pages/sarasota', policy: 'sessionAuth'},
   '/scheduler': {view: 'pages/scheduler', policy: 'sessionAuth'},

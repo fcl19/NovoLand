@@ -37,11 +37,14 @@
       </div>  
   </nav>
 
+  <div id="userSupplyData" data-supplies="<%=supplies%>"></div>
 
   <h2 id="sup_Header">Supplies</h2>
   <body>
     <p id = "welcome">Welcome to NovoLand! We know it can be overwhelming to move on campus, so we've prepared a packing list to help assist new students in the process.</p>
-    
+    <div id="checkBoxAccordian" class = "accordian">
+
+    </div>
     <div class = "accordian">
       <details>
         <summary>
@@ -197,8 +200,63 @@
 </body>
 
 <script>
+  function buildCheckBoxList(supplyData) {
+    for (let g = 0; g < supplyData.length; g++) {
+      const supplyDataGroup = supplyData[g].group_name;
+      const supplyGroupCode = supplyData[g].group_code;
+      let supplyGroupHtml = "";
+      supplyGroupHtml = `
+      <details id="group_${supplyGroupCode}">
+        <summary>
+          ${supplyDataGroup}
+        </summary>
+        <div>
+          <ul>`;
+      for (let s = 0; s < supplyData[g].supplies.length; s++) {
+        const supplyName = supplyData[g].supplies[s].name;
+        const supplyCode = supplyData[g].supplies[s].code;
+        const supplyChecked = supplyData[g].supplies[s].checked;
+        const supplyEntryID = supplyData[g].supplies[s].id;
+        supplyGroupHtml += `<input type="checkbox" data-checkboxid="${supplyEntryID}" id="cb_${supplyCode}" ${supplyChecked ? 'checked' : ''}>${supplyName}</input>${s < supplyData[g].supplies.length - 1 ? '<br>' : ''}`;
+      }
+      supplyGroupHtml += `
+          </ul>
+        </div>
+      </details>
+      `;
+      $("#checkBoxAccordian").append(supplyGroupHtml);
+    }
+  }
+  function bindCheckBoxEvents(supplyData) {
+    for (let g = 0; g < supplyData.length; g++) {
+      const supplyGroupCode = supplyData[g].group_code;
+      for (let s = 0; s < supplyData[g].supplies.length; s++) {
+        const supplyCode = supplyData[g].supplies[s].code;
+        $(`#cb_${supplyCode}`).on("change", () => {
+          const supplyChecked = $(`#cb_${supplyCode}`).is(':checked');
+          const supplyEntryID = $(`#cb_${supplyCode}`).data("checkboxid");
+          //Debugging console logs Begin
+          console.log(`cb_${supplyCode} changed`);
+          console.log(supplyChecked);
+          console.log(supplyEntryID);
+          //Debugging console logs End
+          //TODO Put the ajax call here
+        });
+      }
+    }
+  }
+  var userSupplyData = [];
   $(document).ready(() => {
-   $("#ch_tx").on("change", ()=>{
+    userSupplyData = $("#userSupplyData").data("supplies");
+    //Debugging console logs Begin
+    console.log("userSupplyData");
+    console.log(userSupplyData);
+    //Debugging console logs End
+    if (userSupplyData.length > 0) {
+      buildCheckBoxList(userSupplyData);
+      bindCheckBoxEvents(userSupplyData);
+    }
+   /* $("#ch_tx").on("change", ()=>{
       $.ajax({
       url: "/supplies/changeCheck",
       type: "GET",
@@ -210,7 +268,7 @@
         Swal.fire('There was an issue changing the check of supply', '', 'error');
       }
     });
-    } ) 
+    })  */
   }); 
 
 </script>

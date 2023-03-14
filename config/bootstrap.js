@@ -91,6 +91,48 @@ module.exports.bootstrap = async function(done) {
       }
     ]);
   }
+  if (await SupplyGroups.count() === 0) {
+    //group_code must be unique
+    const supplyGroups = await SupplyGroups.createEach([
+      {
+        group_code: 'RE',
+        group_name: 'Room Essentials',
+      },
+      {
+        group_code: 'BE',
+        group_name: 'Bath Essentials and Toiletries',
+      }
+    ]).fetch();
+    if (await Supplies.count() === 0) {
+      let groupID = supplyGroups.find((group) => group.group_code === 'RE').id;
+      //code must be unique
+      await Supplies.createEach([
+        {
+          code: 'TWINSHEETS',
+          name: 'Twin XL Sheets',
+          group_id: groupID,
+        },
+        {
+          code: 'PILLOW',
+          name: 'Pillows',
+          group_id: groupID,
+        }
+      ]);
+      groupID = supplyGroups.find((group) => group.group_code === 'BE').id;
+      await Supplies.createEach([
+        {
+          code: 'SHOWERCADDY',
+          name: 'Shower Caddy',
+          group_id: groupID,
+        },
+        {
+          code: 'BATHTOWEL',
+          name: 'Bath Towel',
+          group_id: groupID,
+        }
+      ]);
+    }
+  }
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)
   return done();
