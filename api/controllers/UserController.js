@@ -148,7 +148,8 @@ module.exports = {
         username: user.username,
         interests: user.interests,
         tasks: userTasks,
-        isSelfEdit: isSelfEdit
+        isSelfEdit: isSelfEdit,
+        userProfileImage: user.profileImagePath
       };
       return res.view('pages/profile', {
         account: JSON.stringify(account)

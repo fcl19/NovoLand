@@ -16,6 +16,7 @@
     "sails-hook-organics": "^2.0.0",
     "sails-hook-orm": "^4.0.0",
     "sails-hook-sockets": "^2.0.0",
+    "sketchpad": "^0.1.0",
     "sweetalert2": "^11.7.3"
   },
   "devDependencies": {

@@ -8,9 +8,6 @@
       <li class="nav-item">
         <a class="nav-link active" aria-current="page" href="/">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/messages">Messages</a>
-      </li>
       <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
             Information
@@ -22,7 +19,8 @@
             <li><a class="dropdown-item" href="/events">Campus Events</a></li>
             <li><a class="dropdown-item" href="/sarasota">Sarasota</a></li>
             <li><a class = "dropdown-item" href="/scheduler">Scheduler</a></li>
-            <li><a class= "dropdown-item" href="/aboutUs">Orientation</a></li>
+
+            <li><a class= "dropdown-item" href="/orientation">Orientation</a></li>
             <li><a class= "dropdown-item" href="/aboutUs">About Us</a></li>
           </ul>
  
@@ -40,9 +38,9 @@
 </nav>
 
 
-<div style=" margin-top: 3%; margin-left: 150px; margin-right: 150px; display:inline-block; width: 100%;">
+<div style=" margin-top: 3%; margin-left: 15%; margin-right: 15%; display:inline-block; width: 100%;">
   <div style="width: 30%; height: auto; float: left; display:inline-block;">
-      <h1> Recent Posts</h1>
+      <h1 class = "subheadLightBlue"> Recent Posts</h1>
   </div>
   <div style="width: 70%; height: auto; display:inline-block;">
       <div>
@@ -69,7 +67,6 @@
     window.location.href = "/new_post";
   }
   );
-  
   // sort the posts by date
   const post = $("#postData").data('post').sort((a, b) => {
     return new Date(b.createdAt) - new Date(a.createdAt);
@@ -87,7 +84,6 @@
   </div>
   `);
   }});
-  
 </script>
 </body>
 

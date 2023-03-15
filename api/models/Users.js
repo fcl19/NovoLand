@@ -33,6 +33,10 @@ module.exports = {
     tasks: {
       collection: 'usertasks',
       via: 'userID',
-    }
+    },
+    profileImagePath: { // Profile image path
+      type: 'string',
+      defaultsTo: 'images/pictures/ppIcon.png',
+    },
   }
 };

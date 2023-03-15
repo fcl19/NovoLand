@@ -10,9 +10,6 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/messages">Messages</a>
-        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle active" href="#" id="navbardrop" data-toggle="dropdown">
             Information
@@ -24,7 +21,11 @@
             <li><a class="dropdown-item" href="/events">Campus Events</a></li>
             <li><a class="dropdown-item" href="/sarasota">Sarasota</a></li>
             <li><a class = "dropdown-item" href="/scheduler">Scheduler</a></li>
+
             <li><a class= "dropdown-item" href="/aboutUs">About Us</a></li>
+
+            <li><a class= "dropdown-item" href="/orientation">Orientation</a></li>
+
           </ul>
   
         </li>
@@ -38,83 +39,13 @@
       </div>  
   </nav>
 
+  <div id="userSupplyData" data-supplies="<%=supplies%>"></div>
 
   <h2 id="sup_Header">Supplies</h2>
   <body>
     <p id = "welcome">Welcome to NovoLand! We know it can be overwhelming to move on campus, so we've prepared a packing list to help assist new students in the process.</p>
     
-    <div class = "accordian">
-      <details>
-        <summary>
-          Room Essentials
-        </summary>
-        <div>
-          <ul>
-            <input type="checkbox"> Twin XL Sheets</input><br><input type="checkbox"> Pillows</input><br><input type="checkbox"> Blankets</input><br><input type="checkbox"> Lamps</input><br><input type="checkbox"> Waste Basket</input><br><input type="checkbox"> Clothes Hangers</input><br><input type="checkbox"> Clothing</input>
-          </ul>
-        </div>
-      </details>
-      <details>
-        <summary>
-          Bath Essentials and Toiletries
-        </summary>
-        <div>
-          <ul>
-            <input type="checkbox"> Shower Caddy</input><br><input type="checkbox"> Bath Towel</input><br><input type="checkbox"> Shower Supplies (soap, shampoo, conditioner, etc)</input><br><input type="checkbox"> Deoderant</input><br><input type="checkbox"> Toothbrush</input><br><input type="checkbox"> Toothpaste</input><br><input type="checkbox"> Shaving Supplies</input><br><input type="checkbox"> Tissues</input><br><input type="checkbox"> Toilet Paper</input>
-          </ul>
-        </div>
-      </details>
-      <details>
-        <summary>
-          Cleaning Supplies
-        </summary>
-        <div>
-          <ul>
-            <input type="checkbox"> Dish Soap</input><br><input type="checkbox"> Room Deoderizing Spray</input><br><input type="checkbox"> Laundry Supplies</input><br><input type="checkbox"> Hand Sanitizer</input><br><input type="checkbox"> Disinfectant Spray</input><br><input type="checkbox"> Multi-Purpose Cleaner</input><br><input type="checkbox"> Paper Towels or Rags</input>
-          </ul>
-        </div>
-      </details>
-      <details>
-        <summary>
-          Beach Supplies
-        </summary>
-        <div>
-          <ul>
-            <input type="checkbox"> Sunglasses</input><br><input type="checkbox"> Hat</input><br><input type="checkbox"> Beach Towel</input><br><input type="checkbox"> Sunscreen</input><br><input type="checkbox"> Water Bottle</input><br><input type="checkbox"> Swimsuit</input>
-          </ul>
-        </div>
-      </details>
-      <details>
-        <summary>
-          School Supplies
-        </summary>
-        <div>
-            <ul>
-              <input type="checkbox"> Personal Computer</input><br><input type="checkbox"> Printer</input><br><input type="checkbox"> Cat 5E or Cat 6 ethernet cable</input><br><input type="checkbox"> Printer Paper</input><br><input type="checkbox"> Flash Drive</input><br><input type="checkbox"> Notebooks</input><br><input type="checkbox"> Laptop Lock</input><br><input type="checkbox"> Poster Putty</input><br><input type="checkbox"> Stapler</input><br><input type="checkbox"> Pens and Pencils</input><br><input type="checkbox"> Power Strips</input><br><input type="checkbox"> Sturdy Backpack</input><br><input type="checkbox"> Planner / Calendar</input><br><input type="checkbox"> USB Charger</input><br><input type="checkbox"> Earbuds or Headphones</input>
-            </ul>
-        </div>
-      </details>
-      <details>
-        <summary>
-          Emmergency Supplies
-        </summary>
-        <div>
-            <ul>
-            <input type="checkbox"> Prescription Medication</input><br><input type="checkbox"> Over-the-Counter Medications</input><br><input type="checkbox"> Flashlight</input><br><input type="checkbox"> Batteries</input><br><input type="checkbox"> List of Emergency Contacts</input><br><input type="checkbox"> Health Insurance Card</input><br><input type="checkbox"> First-aid Kit with Band-aids</input>
-            </ul>
-        </div>
-      </details>
-      <details>
-        <summary>
-          Other Items (Optional)
-        </summary>
-        <div>
-            <ul>
-            <input type="checkbox"> Small Fan</input><br><input type="checkbox"> Umbrella</input><br><input type="checkbox"> Ear Plugs</input><br><input type="checkbox"> Sewing Kit</input><br><input type="checkbox"> Small Tool Kit</input><br><input type="checkbox"> Under-the-Bed Storage Bins</input><br><input type="checkbox"> Plate, Mug, Silverware</input><br><input type="checkbox"> Posters and Photos to Hang</input><br><input type="checkbox"> Poster Putty</input><br><input type="checkbox"> Camera</input><br><input type="checkbox"> Can Opener</input>
-            </ul>
-        </div>
-      </details>
-    </div>
+    <div id="checkBoxAccordian" class = "accordian"></div>
 
     <div class = "complete">
       To view the complete packing list please visit  
@@ -122,7 +53,7 @@
     </div>
 
   <div class = "where_to_shop">
-    <h2>Where to Shop</h2>
+    <h2 class = "subheadLightBlue">Where to Shop</h2>
 
     <div class = "container-fluid">
       <div class="online">
@@ -196,3 +127,89 @@
   
   </div>
 </body>
+
+<script>
+  function buildCheckBoxList(supplyData) {
+    for (let g = 0; g < supplyData.length; g++) {
+      const supplyDataGroup = supplyData[g].group_name;
+      const supplyGroupCode = supplyData[g].group_code;
+      let supplyGroupHtml = "";
+      supplyGroupHtml = `
+      <details id="group_${supplyGroupCode}">
+        <summary>
+          ${supplyDataGroup}
+        </summary>
+        <div>
+          <ul>`;
+      for (let s = 0; s < supplyData[g].supplies.length; s++) {
+        const supplyName = supplyData[g].supplies[s].name;
+        const supplyCode = supplyData[g].supplies[s].code;
+        const supplyChecked = supplyData[g].supplies[s].checked;
+        const supplyEntryID = supplyData[g].supplies[s].id;
+        supplyGroupHtml += `<input type="checkbox" data-checkboxid="${supplyEntryID}" id="cb_${supplyCode}" ${supplyChecked ? 'checked' : ''}> ${supplyName}</input>${s < supplyData[g].supplies.length - 1 ? '<br>' : ''}`;
+      }
+      supplyGroupHtml += `
+          </ul>
+        </div>
+      </details>
+      `;
+      $("#checkBoxAccordian").append(supplyGroupHtml);
+    }
+  }
+  function bindCheckBoxEvents(supplyData) {
+    for (let g = 0; g < supplyData.length; g++) {
+      const supplyGroupCode = supplyData[g].group_code;
+      for (let s = 0; s < supplyData[g].supplies.length; s++) {
+        const supplyCode = supplyData[g].supplies[s].code;
+        $(`#cb_${supplyCode}`).on("change", () => {
+          const supplyChecked = $(`#cb_${supplyCode}`).is(':checked');
+          const supplyEntryID = $(`#cb_${supplyCode}`).data("checkboxid");
+          //Debugging console logs Begin
+          console.log(`cb_${supplyCode} changed`);
+          console.log(supplyChecked);
+          console.log(supplyEntryID);
+          //Debugging console logs End
+          //TODO Put the ajax call here
+          $.ajax({
+            url: "/supplies/changeCheck",
+            type: "GET",
+            async: false,
+            data: {supplyID: supplyEntryID, checked: supplyChecked},
+            success: function(data) {
+              console.log(data);
+            },
+            error: function(err) {
+              Swal.fire('There was an issue changing the check of supply', '', 'error');
+            }
+          });
+        });
+      }
+    }
+  }
+  var userSupplyData = [];
+  $(document).ready(() => {
+    userSupplyData = $("#userSupplyData").data("supplies");
+    //Debugging console logs Begin
+    console.log("userSupplyData");
+    console.log(userSupplyData);
+    //Debugging console logs End
+    if (userSupplyData.length > 0) {
+      buildCheckBoxList(userSupplyData);
+      bindCheckBoxEvents(userSupplyData);
+    }
+   /* $("#ch_tx").on("change", ()=>{
+      $.ajax({
+      url: "/supplies/changeCheck",
+      type: "GET",
+      async: false,
+      success: function(data) {
+        console.log(data);
+      },
+      error: function(err) {
+        Swal.fire('There was an issue changing the check of supply', '', 'error');
+      }
+    });
+    })  */
+  }); 
+
+</script>
