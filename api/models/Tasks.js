@@ -24,7 +24,7 @@ module.exports = {
     },
     taskElement: {
       type: 'string',
-      defaultsTo: '<i class="fa fa-star"></i>',
+      defaultsTo: '<i class="fa fa-star fa-5x"></i>',
     }
   }
 };

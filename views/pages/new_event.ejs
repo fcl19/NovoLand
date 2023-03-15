@@ -8,9 +8,6 @@
         <li class="nav-item">
           <a class="nav-link" aria-current="page" href="/">Home</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/messages">Messages</a>
-        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
             Information
@@ -22,6 +19,7 @@
             <li><a class="dropdown-item" href="/events">Campus Events</a></li>
             <li><a class="dropdown-item" href="/sarasota">Sarasota</a></li>
             <li><a class = "dropdown-item" href="/scheduler">Scheduler</a></li>
+            <li><a class= "dropdown-item" href="/orientation">Orientation</a></li>
           </ul>
   
         </li>
@@ -70,27 +68,12 @@
       min="09:00" max="18:00">
       </div>
 
-      <!--Radio buttons for whether it reoccurs-->
-      <br>
-      <p><strong>Select how often the event reoccurs: </strong></p>
-      <div class="radioButtonAlign">
-        <input type="radio" id="notReoccur" name="reoccuring" value="NO">
-        <label for="notReoccur">Not Reoccuring</label><br>
-        
-        <input type="radio" id="dailyReoccur" name="reoccuring" value="D">
-        <label for="dailyReoccur">Daily</label><br>
-        
-        <input type="radio" id="weeklyReoccur" name="reoccuring" value="W">
-        <label for="weeklyReoccur">Weekly</label><br>
-        
-        <input type="radio" id="monthlyReoccur" name="reoccuring" value="M">
-        <label for="monthlyReoccur">Monthly</label><br>
-      </div>
 
       <!--cancel and submit event buttons-->
       <br>
-      <button type="submit" class="endButton">Submit</button>
-      <button type="button" class="endButton" onclick="closeForm()">Cancel</button>
+
+      <button type="submit" class="endButton" onclick="eventFormdata()">Submit</button>
+      
       <br>
 </form>
 
@@ -113,3 +96,44 @@
     }
   });
 </script>
+
+<script>
+  function eventFormdata() 
+  {
+    var eventName = document.getElementById("eventName").value;
+    var eventDate = document.getElementById("newEventDate").value;
+    var allDayEvent = document.getElementById("allDayEvent").value;
+    var startTime = document.getElementById("startTime").value;
+    var endTime = document.getElementById("endTime").value;
+    var reoccuring = null;
+    //get recoccuring events from radio buttons
+
+    $.ajax({
+      url:  '/scheduler/newEvent',
+      type: 'GET',
+      data: {subject: eventName, 
+            description: eventName,
+          eventDate: eventDate,
+          startTime: startTime,
+          endTime: endTime,
+          reoccuring: reoccuring,
+        },
+      success: function(result) {
+          console.log("success");
+          if(result.error)
+          {
+            Swal.fire({ //show error alert
+            title: "Error",
+            text: result.error,
+            icon: "error"
+          });
+            console.log("error");
+          }
+          else
+          {
+            window.location.href = "/scheduler";
+          }
+      }
+    });
+  }
+  </script>
