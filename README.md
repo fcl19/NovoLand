@@ -11,3 +11,6 @@ Contributors' names and contact info:
 
 ## Description and Motivation
 
+NovoLand, also known as NuPath was created as a Project for Project 2 of the Software Engineering class at New College of Florida.
+
+NuPath is for incoming students to interact and get to know eachother. It is also for them to get to know New College and Sarasota.  
