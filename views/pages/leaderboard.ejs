@@ -41,6 +41,11 @@
   <p>The NuPath Leaderboard keeps track of how much each student has engaged with the website (and prepared for NovoLand!) Complete all the tasks to become a NuPath Task Master and unlock a special surprise.  </p>
   <p><strong>Don't forget to complete the following onboarding tasks: </strong></p>
   <div id="tasksToCompleteContainer"></div>
+  <div id="taskMasterCompleteContainer">
+    <h2 class="subheadLightBlue">Congratulations!</h2>
+    <p>You have completed all the tasks and unlocked the NuPath Secret Page.</p>
+    <a href="/doodle" class="btn btn-primary">Go to Secret Page</a>
+  </div>
   <br>
   <h2 class="subheadLightBlue">Task Masters</h2>
   <div id="taskMasterContainer"></div>
@@ -70,6 +75,7 @@
       clearLeaderBoard();
       buildLeaderBoard(leaderboardData);
       buildTasksToComplete(tasksToComplete);
+      initTaskMasterSecret(tasksToComplete);
     }
   }
   function buildTasksToComplete(tasksToComplete) {
@@ -198,12 +204,28 @@
     $("#tasksToCompleteContainer").empty();
     $("#taskMasterContainer").empty();
     $("#leaderboardContainer").empty();
+    $("#taskMasterCompleteContainer").hide();
+  }
+
+  function initTaskMasterSecret(tasksToComplete) {
+    let completedTasks = 0;
+    for (const task of tasksToComplete) {
+      if (task.isCompleted) {
+        completedTasks++;
+      }
+    }
+    if (completedTasks === tasksToComplete.length) {
+      $("#taskMasterCompleteContainer").show();
+    } else {
+      $("#taskMasterCompleteContainer").hide();
+    }
   }
 
   function initPage() {
     const leaderboardData = $("#leaderboardData").data("leaderboard");
     const tasksToComplete = $("#tasksToComplete").data("tasks");
     buildTasksToComplete(tasksToComplete);
+    initTaskMasterSecret(tasksToComplete);
     buildLeaderBoard(leaderboardData);
   }
   initPage();

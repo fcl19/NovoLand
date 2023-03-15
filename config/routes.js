@@ -39,11 +39,17 @@ module.exports.routes = {
   '/edit_profile_pic': {view: 'pages/edit_profile_pic', controller: 'ProfilePictureController', action: 'viewProfilePic', policy: 'sessionAuth'},
   '/tasks/complete': {controller: 'TaskController', action: 'completeTask', policy: 'sessionAuth'}, // Complete task action
   '/leaderboard/fetch': {controller: 'LeaderboardController', action: 'fetchLeaderboard', policy: 'sessionAuth'}, // Fetch leaderboard action
+
   '/supplies/changeCheck': {controller: 'SuppliesController', action: 'changeCheckbox', policy: 'sessionAuth'}, //check or uncheck supplies 
   '/new_post': {view: 'pages/new_post'},
+
   '/post': {view: 'pages/post'},
   '/post/create': {controller: 'PostsController', action: 'createPost', policy: 'sessionAuth'},
   '/post/fetch': {controller: 'PostsController', action: 'fetchPosts', policy: 'sessionAuth'},
+  '/doodle': {view: 'pages/doodle', controller: 'UserDrawingsController', action: 'viewDoodlePage', policy: 'sessionAuth'},
+  '/doodle/save': {controller: 'UserDrawingsController', action: 'saveUserDrawing', policy: 'sessionAuth'},
+  '/doodle/delete': {controller: 'UserDrawingsController', action: 'deleteUserDrawing', policy: 'sessionAuth'},
+  '/doodle/fetch': {controller: 'UserDrawingsController', action: 'getUserDrawingList', policy: 'sessionAuth'},
 
 
   //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
