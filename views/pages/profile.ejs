@@ -1,14 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <a class="navbar-brand" href="#">NuPath</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="collapsibleNavbar">
-      <ul class="navbar-nav ms-auto">
-        <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/">Home</a>
-        </li>
-        <li class="nav-item">
+  <a class="navbar-brand" href="#">NuPath</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="/">Home</a>
+      </li>
+      <li class = "nav-item">
           <a class="nav-link" href="/messages">Messages</a>
         </li>
         <li class="nav-item dropdown">
@@ -22,6 +22,7 @@
             <li><a class="dropdown-item" href="/events">Campus Events</a></li>
             <li><a class="dropdown-item" href="/sarasota">Sarasota</a></li>
             <li><a class = "dropdown-item" href="/scheduler">Scheduler</a></li>
+            <li><a class= "dropdown-item" href="/orientation">Orientation</a></li>
           </ul>
   
         </li>
@@ -34,11 +35,12 @@
         </ul>
       </div>  
   </nav>
-
+  
 <div id="accountInfo" data-account="<%=account%>"></div> <!-- data-account attribute holds account info for page to use -->
 <br/>
-<h2 id="profileHeader">Account Information</h2> <!-- header for page -->
+<div id="profileHeaderContainer"><img id="profileIcon" src="images/pictures/ppIcon.png" alt="profile icon"><h2 id="profileHeader">Account Information</h2></div> <!-- header for page -->
 <div class="accountContainer"> <!-- container for account info -->
+
   <br/>
   <label for="username"><b>Username:</b></label> <!-- label for username -->
   <div id="username" name="username" class="userInfo"></div> <!-- div to hold username -->
@@ -61,11 +63,17 @@
   <br/><br/><br/>
   <div class="selfEditButtons"><button id="logout">Logout</button><button id="editAccountValues" class="editButton">Edit Account</button></div> <!-- div to hold edit and logout buttons -->
   <button id="saveAccountValues" class="editButton">Save Changes</button> <!-- button to save changes -->
+  <br>
+  <br>
+  <a href="/edit_profile_pic">
+  <button id="newProfilePic" class="profileButton">Edit Profile Picture</button></a>
 </div>
+
 
 <script>
   function initPage() { //function to initialize page
     $("#saveAccountValues").hide(); //hide save button
+    
     let account = $("#accountInfo").data("account"); //get account info from data-account attribute
     if (account.isSelfEdit) { //if user is viewing their own profile
       $("#profileHeader").text("My Profile"); //change header to "My Profile"
@@ -75,6 +83,7 @@
         $("#email").html(`<input type="text" id="emailInput" name="emailInput" value="${account.email}">`); //change to input
         $("#interests").html(`<input type="text" id="interestsInput" name="interestsInput" value="${account.interests}">`); //change to input
         $("#editAccountValues").hide(); //hide edit button
+        $("#newProfilePic").hide(); //hide edit profile picture button
         $("#saveAccountValues").show(); //show save button
       });
       $("#saveAccountValues").click(function() { //save button
@@ -124,145 +133,112 @@
           }
         });
       });
-      $("#logout").click(function() { //logout button
-        $.ajax({ //send ajax request to logout
-          url: "/user/logout",
-          type: "GET",
-          success: function(data) { //on success
-            if (data.success) {
-              window.location.href = "/"; //redirect to home page
-            } else {
-              Swal.fire({ //show error alert
-                title: "Error",
-                text: data.error,
-                icon: "error",
-                confirmButtonText: "Ok"
-              })
-            }
-          },
-          error: function(err) { //on error
+    $("#logout").click(function() { //logout button
+      $.ajax({ //send ajax request to logout
+        url: "/user/logout",
+        type: "GET",
+        success: function(data) { //on success
+          if (data.success) {
+            window.location.href = "/"; //redirect to home page
+          } else {
             Swal.fire({ //show error alert
               title: "Error",
-              text: "An error occurred while trying to logout.",
+              text: data.error,
               icon: "error",
               confirmButtonText: "Ok"
             })
           }
-        });
+        },
+        error: function(err) { //on error
+          Swal.fire({ //show error alert
+            title: "Error",
+            text: "An error occurred while trying to logout.",
+            icon: "error",
+            confirmButtonText: "Ok"
+          })
+        }
       });
-    } else {
-      $("#profileHeader").text(`${account.firstName} ${account.lastName}'s Profile`); //change header to "First Last's Profile"
-      $(".selfEditButtons").hide(); //hide edit and logout buttons
-    }
-    $("#username").text(account.username); //set username
-    $("#firstName").text(account.firstName); //set first name
-    $("#lastName").text(account.lastName); //set last name
-    $("#email").text(account.email); //set email
-    $("#interests").text(account.interests); //set interests
-    for (let task = 0; task < account.tasks.length; task += 1) { //for each task completed
-      //$("#tasksCompletedList").append(`<label id='tasksCompletedTitle'>${task === 0 ? "<b>Tasks Completed:</b>" : ""}</label>`);
-      $("#tasksCompletedList").append(`<div id='tasksCompleted' class="task" title="${account.tasks[task].name}" name='tasksCompleted' class='userInfo'>${account.tasks[task].taskElement}</div>`);
-    }  
+    });
+  } else {
+    $("#profileHeader").text(`${account.firstName} ${account.lastName}'s Profile`); //change header to "First Last's Profile"
+    $(".selfEditButtons").hide(); //hide edit and logout buttons
+    $("#newProfilePic").hide();//hide edit profile pic button
+
   }
-  initPage(); //call function to initialize page
+  $("#profileIcon").attr("src", account.userProfileImage); //set profile picture
+  $("#username").text(account.username); //set username
+  $("#firstName").text(account.firstName); //set first name
+  $("#lastName").text(account.lastName); //set last name
+  $("#email").text(account.email); //set email
+  $("#interests").text(account.interests); //set interests
+  for (let task = 0; task < account.tasks.length; task += 1) { //for each task completed
+    //$("#tasksCompletedList").append(`<label id='tasksCompletedTitle'>${task === 0 ? "<b>Tasks Completed:</b>" : ""}</label>`);
+    $("#tasksCompletedList").append(`<div id='tasksCompleted' class="task" title="${account.tasks[task].name}" name='tasksCompleted' class='userInfo'>${account.tasks[task].taskElement}</div>`);
+  }  
+}
+initPage(); //call function to initialize page
 </script>
 
+
 <style>
-  #profileHeader {
-    margin: auto;
-    width: 70%;
-    padding: 10px;
-  }
-  .accountContainer {
-    margin: auto;
-    width: 60%;
-    padding: 10px;
-  }
-  .userInfo {
-    display: inline-block;
-    margin-left: 20px;
-  }
-  label {
-    width: 160px;
-    text-align: right;
-  }
-  #username {
-    margin-left: 20px;
-    width: 35%;
-  }
-  #tasksCompletedTitle {
-    width: 160px;
-    text-align: right;
-  }
-  .selfEditButtons {
-    display: inline-block;
-  }
-  .editButton {
-    margin-left: 400px;
-  }
-  .task {
-    display: inline-block;
-    margin-left: 20px;
-    width: 5%;
-  }
-  #tasksCompletedList {
-    display: inline-block;
-  }
+#profileHeader {
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 5%;
+}
+#profileIcon {
+  display: block;
+  width: 10%;
+  height: 10%;
+}
+#profileHeaderContainer {
+  margin: auto;
+  width: 70%;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.accountContainer {
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+.userInfo {
+  display: inline-block;
+  margin-left: 20px;
+}
+label {
+  width: 160px;
+  text-align: right;
+}
+#username {
+  margin-left: 20px;
+  width: 35%;
+}
+#tasksCompletedTitle {
+  width: 160px;
+  text-align: right;
+}
+.selfEditButtons {
+  display: inline-block;
+}
+.editButton {
+  margin-left: 400px;
+}
+
+
+.profileButton{
+  margin-left: 453px;
+}
+.task {
+  display: inline-block;
+  margin-left: 20px;
+  width: 5%;
+}
+#tasksCompletedList {
+  display: inline-block;
+}
 </style>
-
-
-  <div class="catPicsContainer">
-    <p>Choose a profile picture: </p>
-    <div class="catPics">
-        <img id="catPic1" src="images/pictures/cat1.jpg" alt="cat picture 1" style="width:30%">
-        <img id="catPic2" src="images/pictures/cat2.jfif" alt="cat picture 2" style="width:30%">
-        <img id="catPic3" src="images/pictures/cat3.jpg" alt="cat picture 3" style="width:30%">
-        <img id="catPic4" src="images/pictures/cat4.webp" alt="cat picture 4" style="width:30%">
-        <img id="catPic5" src="images/pictures/cat5.jpg" alt="cat picture 5" style="width:30%">
-        <img id="catPic6" src="images/pictures/cat6.jpg" alt="cat picture 6" style="width:30%">
-    </div>
-    <hr>
-
-    <div>
-        <p> Profile Picture: (Test Purposes)</p>
-        <img id="profileIcon" src="images/pictures/ppIcon.png" alt="profile icon" style="width:30%">
-    </div>
-    <br>
-    <button id="resetBtn">Reset</button>
-    <button id="saveBtn">Save</button>
-  </div>
-
-  <script>
-      var profileIconImg = document.getElementById('profileIcon')
-
-      catPic1.onclick = function(){
-          profileIconImg.src = "images/pictures/cat1.jpg";
-      }
-
-      catPic2.onclick = function(){
-          profileIconImg.src = "images/pictures/cat2.jfif";
-      }
-
-      catPic3.onclick = function(){
-          profileIconImg.src = "images/pictures/cat3.jpg";
-      }
-
-      catPic4.onclick = function(){
-          profileIconImg.src = "images/pictures/cat4.webp";
-      }
-
-      catPic5.onclick = function(){
-          profileIconImg.src = "images/pictures/cat5.jpg";
-      }
-
-      catPic6.onclick = function(){
-          profileIconImg.src = "images/pictures/cat6.jpg";
-      }
-
-      resetBtn.onclick = function(){
-          profileIconImg.src = "images/pictures/ppIcon.png";
-      }
-
-      
-  </script>
 
