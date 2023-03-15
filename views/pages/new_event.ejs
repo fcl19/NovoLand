@@ -90,8 +90,9 @@
 
       <!--cancel and submit event buttons-->
       <br>
-      <button type="submit" class="endButton">Submit</button>
       <button type="button" class="endButton" onclick="closeForm()">Cancel</button>
+      <button type="submit" class="endButton" onclick="eventFormdata()">Submit</button>
+      
       <br>
 </form>
 
@@ -114,3 +115,44 @@
     }
   });
 </script>
+
+<script>
+  function eventFormdata() 
+  {
+    var eventName = document.getElementById("eventName").value;
+    var eventDate = document.getElementById("newEventDate").value;
+    var allDayEvent = document.getElementById("allDayEvent").value;
+    var startTime = document.getElementById("startTime").value;
+    var endTime = document.getElementById("endTime").value;
+    var reoccuring = null;
+    //get recoccuring events from radio buttons
+
+    $.ajax({
+      url:  '/scheduler/newEvent',
+      type: 'GET',
+      data: {subject: eventName, 
+            description: eventName,
+          eventDate: eventDate,
+          startTime: startTime,
+          endTime: endTime,
+          reoccuring: reoccuring,
+        },
+      success: function(result) {
+          console.log("success");
+          if(result.error)
+          {
+            Swal.fire({ //show error alert
+            title: "Error",
+            text: result.error,
+            icon: "error"
+          });
+            console.log("error");
+          }
+          else
+          {
+            window.location.href = "/scheduler";
+          }
+      }
+    });
+  }
+  </script>
