@@ -123,12 +123,19 @@
     var allDayEvent = document.getElementById("allDayEvent").value;
     var startTime = document.getElementById("startTime").value;
     var endTime = document.getElementById("endTime").value;
+    var reoccuring = null;
     //get recoccuring events from radio buttons
 
     $.ajax({
       url:  '/scheduler/newEvent',
       type: 'GET',
-      data: {subject: eventName},
+      data: {subject: eventName, 
+            description: eventName,
+          eventDate: eventDate,
+          startTime: startTime,
+          endTime: endTime,
+          reoccuring: reoccuring,
+        },
       success: function(result) {
           console.log("success");
           if(result.error)

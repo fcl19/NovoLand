@@ -7,10 +7,10 @@
 
 module.exports = {
     attributes: {
-      id: {
-        type: 'number',
-        autoIncrement: true
-      },
+      userId: {
+        model: 'users',
+        required: true,
+    },
       subject: {
         type: 'string',
         required: true

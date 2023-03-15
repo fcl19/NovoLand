@@ -91,6 +91,29 @@ module.exports.bootstrap = async function(done) {
       }
     ]);
   }
+  if((await AcademicCal.count()) === 0) {
+    await AcademicCal.createEach([
+      {
+        subject: 'Last Installment on Payment Plans Due',
+        description: 'Last Installement on Payment Plans Due',
+        eventDate: '2023-03-17',
+        startTime: '10:00',
+        endTime: '17:00',
+        allDayEvent: false,
+        location: ' ',
+
+    },
+    {
+        subject: 'Last Installment on Payment Plans Due',
+        description: 'Last Installement on Payment Plans Due',
+        eventDate: '2023-03-17',
+        startTime: '10:00',
+        endTime: '17:00',
+        allDayEvent: false,
+        location: ' ',
+    }]);
+  }
+
   // Don't forget to trigger `done()` when this bootstrap function's logic is finished.
   // (otherwise your server will never lift, since it's waiting on the bootstrap)
   return done();

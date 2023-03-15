@@ -100,6 +100,12 @@
           <br>
           <br>
           <h3>Today's Events</h3>
+
+          <div>
+            <ul id="todaysEvents">
+              <li>Event Name from start to end time</li>
+          </ul>
+        </div>
          
           
           
@@ -109,9 +115,9 @@
           </div>
           
           
-          <div id="todaysEvents">
-            <!--Space for the day's events-->
-          </div>
+
+
+          <div id="eventData" data-event="<%=eventData%>"></div> 
         
       
     </body>
@@ -238,8 +244,30 @@ header .current-date{
   function dateFormdata() 
   {
     var eventDates = document.getElementById("eventDate").value;
+
+    $("#todaysEvents").empty();
+
+    let eventData = $("#eventData").data("event");
+
+      eventData = eventData.filter(a => {
+        var date = new Date(a.eventDate);
+        var start = new Date(eventDates);
+        start.setUTCHours(0,0,0,0);
+
+        var end = new Date(eventDates);
+        end.setUTCHours(23,59,59,999);
+      return (date >= start && date <= end);
+     });
+    console.log(eventData);
+
+    for(i = 0; i < eventData.length; i++){
+      $("#todaysEvents").append(`<li>${eventData[i].subject} from ${eventData[i].startTime} to ${eventData[i].endTime}</li>`)
+
+    }
+
+
     //need to write the route page for this
-    $.ajax({
+  /*  $.ajax({
       url:  '/scheduler/fetchEvent',
       type: 'GET',
       data: {startDate: eventDate},
@@ -259,17 +287,20 @@ header .current-date{
             window.location.href = "/scheduler";
           }
       }
-    });
+    }); */
   }
   </script>
 
 
 <script>
- // $(document).ready(() => {console.log($("#eventData").data('event'))});
+ $(document).ready(() => {console.log($("#eventData").data('event'))});
+ let event = $("#eventData").data("event"); //get account info from data-account attribute
     
   $("#createEvent").on("click", () => {
     window.location.href = "/new_event";
   });
+
+  
 
 
 // Template post

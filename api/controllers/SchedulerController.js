@@ -5,10 +5,17 @@
  */
 
 
+
+
+
+
 module.exports =  {
+
     createEvent: async function (req, res) { // This is the action to create a new event
       try {
+        
         const params = {
+          userId: (req.session.userId),
           subject: req.param('subject'), // This is the event name
           description: req.param('description'), //This is not currently collected
           eventDate: req.param('eventDate'), // This is the date of the event
@@ -20,6 +27,7 @@ module.exports =  {
           reoccuring: req.param('reoccuring') // This is the value that determines if the event is reoccuring ['NO', 'D', 'W', 'M'] NOT REOCCURING, DAILY, WEEKLY, MONTHLY
         };
         const eventRecord = {
+          userId: (req.session.userId),
           subject: params.subject,
           description: params.description ? params.description : 'No description provided',
           eventDate: params.eventDate,
@@ -40,8 +48,10 @@ module.exports =  {
             });
           }
         }
-        await Events.create(eventRecord);
-        return res.redirect('/');
+        await EventSchedule.create(eventRecord);
+        return res.send({
+          success: true
+        })
       } catch (error) {
         console.log(error);
         return res.send({
@@ -86,21 +96,22 @@ module.exports =  {
     },
     fetchEvents: async function (req, res) { // This is the action to fetch events for a given date range
       try {
-        const params = {
-          startDate: req.param('startDate'), // This is the start date of the date range
-          endDate: req.param('endDate') // This is the end date of the date range
-        };
+        
         const events = await EventSchedule.find({
           where: {
-            eventDate: {
-              '>=': params.startDate,
-              '<=': params.endDate
-            }
+            userId: req.session.userId
+            
           }
         });
-        return res.send({
-          events
-        });
+        const combinedEvents = await getAcademicEvents(events);
+       
+            return res.view('pages/scheduler', {
+                //eventData:JSON.stringify(events),
+                eventData:JSON.stringify(combinedEvents)
+            }
+            );
+ 
+
       } catch (error) {
         console.log(error);
         return res.send({
@@ -122,6 +133,22 @@ module.exports =  {
       }
     }
   };
-  
+
+async function getAcademicEvents(userEvents){
+  const academicEvents = await AcademicCal.find();
+  console.log(academicEvents);
+  const academicEventsArr = [];
+  for(i = 0; i < academicEvents.length; i++){
+    academicEventsArr.push(academicEvents[i]);
+
+  }
+
+  for(i = 0; i < userEvents.length; i++){
+    academicEventsArr.push(userEvents[i]);
+  }
+
+  return academicEventsArr;
+}
+
   
   
