@@ -65,7 +65,6 @@
     window.location.href = "/new_post";
   }
   );
-  
   // sort the posts by date
   const post = $("#postData").data('post').sort((a, b) => {
     return new Date(b.createdAt) - new Date(a.createdAt);
@@ -76,7 +75,6 @@
       <div>
           <h3> <b>${post[i].userId.firstName + " " + post[i].userId.lastName } </b> </h3>
           <h6> ${new Date(post[i].createdAt).toLocaleString('en-US') }</h6>
-
       </div>
       <p>  
         ${post[i].body}
@@ -84,7 +82,6 @@
   </div>
   `);
   }});
-  
 </script>
 </body>
 

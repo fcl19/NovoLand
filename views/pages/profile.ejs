@@ -66,6 +66,21 @@
   <button id="newProfilePic" class="profileButton">Edit Profile Picture</button></a>
 </div>
 
+<div>
+  <p>
+    Contact them by sending an email!
+  </p>
+  <button onclick="emailFunc()">Send E-mail</button>
+</div>
+
+<script>
+  function emailFunc() {
+    let account = $("#accountInfo").data("account");
+    let emailacc = document.querySelector("#email").innerHTML;
+    window.open(`mailto:${emailacc}`, "myWindow", 'width=800,height=600');
+    window.close();
+  }
+</script>
 
 <script>
   function initPage() { //function to initialize page
