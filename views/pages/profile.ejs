@@ -66,7 +66,7 @@
   <button id="newProfilePic" class="profileButton">Edit Profile Picture</button></a>
 </div>
 
-<div>
+<div id="emailButton">
   <p>
     Contact them by sending an email!
   </p>
@@ -88,6 +88,7 @@
     
     let account = $("#accountInfo").data("account"); //get account info from data-account attribute
     if (account.isSelfEdit) { //if user is viewing their own profile
+      $("#emailButton").hide(); //hide send email button
       $("#profileHeader").text("My Profile"); //change header to "My Profile"
       $("#editAccountValues").click(function() { //edit button
         $("#firstName").html(`<input type="text" id="firstNameInput" name="firstNameInput" value="${account.firstName}">`); //change to input
@@ -175,6 +176,7 @@
     $("#profileHeader").text(`${account.firstName} ${account.lastName}'s Profile`); //change header to "First Last's Profile"
     $(".selfEditButtons").hide(); //hide edit and logout buttons
     $("#newProfilePic").hide();//hide edit profile pic button
+    $("#emailButton").show(); //show send email button
 
   }
   $("#profileIcon").attr("src", account.userProfileImage); //set profile picture
