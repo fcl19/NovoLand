@@ -8,136 +8,131 @@
       <li class="nav-item">
         <a class="nav-link" aria-current="page" href="/">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/messages">Messages</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          Information
-        </a>
-        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li><a class="dropdown-item " href="/residence_halls">Residence Halls</a></li>
-          <li><a class="dropdown-item" href="https://www.ncf.edu/life-at-new/where-to-eat/">On-campus Dining</a></li>
-          <li><a class="dropdown-item" href="/supplies">Supplies</a></li>
-          <li><a class="dropdown-item" href="/events">Campus Events</a></li>
-          <li><a class="dropdown-item" href="/sarasota">Sarasota</a></li>
-          <li><a class = "dropdown-item" href="/scheduler">Scheduler</a></li>
-        </ul>
-
-      </li>
-        <li class="nav-item">
-          <a class="nav-link " href="/leaderboard">Leaderboard</a>
+      <li class = "nav-item">
+          <a class="nav-link" href="/messages">Messages</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link active" href="/profile">Profile</a>
-        </li>    
-      </ul>
-    </div>  
-</nav>
-
-
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            Information
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item " href="/residence_halls">Residence Halls</a></li>
+            <li><a class="dropdown-item" href="https://www.ncf.edu/life-at-new/where-to-eat/">On-campus Dining</a></li>
+            <li><a class="dropdown-item" href="/supplies">Supplies</a></li>
+            <li><a class="dropdown-item" href="/events">Campus Events</a></li>
+            <li><a class="dropdown-item" href="/sarasota">Sarasota</a></li>
+            <li><a class = "dropdown-item" href="/scheduler">Scheduler</a></li>
+            <li><a class= "dropdown-item" href="/orientation">Orientation</a></li>
+          </ul>
+  
+        </li>
+          <li class="nav-item">
+            <a class="nav-link " href="/leaderboard">Leaderboard</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="/profile">Profile</a>
+          </li>    
+        </ul>
+      </div>  
+  </nav>
+  
 <div id="accountInfo" data-account="<%=account%>"></div> <!-- data-account attribute holds account info for page to use -->
 <br/>
-<h2 id="profileHeader">Account Information</h2> <!-- header for page -->
+<div id="profileHeaderContainer"><img id="profileIcon" src="images/pictures/ppIcon.png" alt="profile icon"><h2 id="profileHeader">Account Information</h2></div> <!-- header for page -->
 <div class="accountContainer"> <!-- container for account info -->
 
-
-<br/>
-<label for="username"><b>Username:</b></label> <!-- label for username -->
-<div id="username" name="username" class="userInfo"></div> <!-- div to hold username -->
-<br/>
-<label for="firstName"><b>First Name:</b></label> <!-- label for first name -->
-<div id="firstName" name="firstName" class="userInfo"></div> <!-- div to hold first name -->
-<br/>
-<label for="lastName"><b>Last Name:</b></label> <!-- label for last name -->
-<div id="lastName" name="lastName" class="userInfo"></div> <!-- div to hold last name -->
-<br/>
-<label for="email"><b>Email:</b></label> <!-- label for email -->
-<div id="email" name="email" class="userInfo"></div> <!-- div to hold email -->
-<br/>
-<label for="interests"><b>Interests:</b></label> <!-- label for interests -->
-<div id="interests" name="interests" class="userInfo"></div> <!-- div to hold interests -->
-<br/>
-<label for="tasksCompleted"><b>Tasks Completed:</b></label> <!-- label for tasks completed -->
-<div id="tasksCompletedList"> <!-- div to hold tasks completed if any -->
-</div>
-<br/><br/><br/>
-<div class="selfEditButtons"><button id="logout">Logout</button><button id="editAccountValues" class="editButton">Edit Account</button></div> <!-- div to hold edit and logout buttons -->
-<button id="saveAccountValues" class="editButton">Save Changes</button> <!-- button to save changes -->
-<br>
-<br>
-<a href="/edit_profile_pic">
-<button id="newProfilePic" class="profileButton">Edit Profile Picture</button></a>
+  <br/>
+  <label for="username"><b>Username:</b></label> <!-- label for username -->
+  <div id="username" name="username" class="userInfo"></div> <!-- div to hold username -->
+  <br/>
+  <label for="firstName"><b>First Name:</b></label> <!-- label for first name -->
+  <div id="firstName" name="firstName" class="userInfo"></div> <!-- div to hold first name -->
+  <br/>
+  <label for="lastName"><b>Last Name:</b></label> <!-- label for last name -->
+  <div id="lastName" name="lastName" class="userInfo"></div> <!-- div to hold last name -->
+  <br/>
+  <label for="email"><b>Email:</b></label> <!-- label for email -->
+  <div id="email" name="email" class="userInfo"></div> <!-- div to hold email -->
+  <br/>
+  <label for="interests"><b>Interests:</b></label> <!-- label for interests -->
+  <div id="interests" name="interests" class="userInfo"></div> <!-- div to hold interests -->
+  <br/>
+  <label for="tasksCompleted"><b>Tasks Completed:</b></label> <!-- label for tasks completed -->
+  <div id="tasksCompletedList"> <!-- div to hold tasks completed if any -->
+  </div>
+  <br/><br/><br/>
+  <div class="selfEditButtons"><button id="logout">Logout</button><button id="editAccountValues" class="editButton">Edit Account</button></div> <!-- div to hold edit and logout buttons -->
+  <button id="saveAccountValues" class="editButton">Save Changes</button> <!-- button to save changes -->
+  <br>
+  <br>
+  <a href="/edit_profile_pic">
+  <button id="newProfilePic" class="profileButton">Edit Profile Picture</button></a>
 </div>
 
 
 <script>
-function initPage() { //function to initialize page
-  $("#saveAccountValues").hide(); //hide save button
-  
-  $("#newProfilePic").on("click", () => { // When the register button is clicked
-        window.location.href = "/edit_profile_pic"; // Redirect to the register page
-    });
- 
-  let account = $("#accountInfo").data("account"); //get account info from data-account attribute
-  if (account.isSelfEdit) { //if user is viewing their own profile
-    $("#profileHeader").text("My Profile"); //change header to "My Profile"
-    $("#editAccountValues").click(function() { //edit button
-      $("#firstName").html(`<input type="text" id="firstNameInput" name="firstNameInput" value="${account.firstName}">`); //change to input
-      $("#lastName").html(`<input type="text" id="lastNameInput" name="lastNameInput" value="${account.lastName}">`); //change to input
-      $("#email").html(`<input type="text" id="emailInput" name="emailInput" value="${account.email}">`); //change to input
-      $("#interests").html(`<input type="text" id="interestsInput" name="interestsInput" value="${account.interests}">`); //change to input
-      $("#editAccountValues").hide(); //hide edit button
-      $("#newProfilePic").hide(); //hide edit profile picture button
-      $("#saveAccountValues").show(); //show save button
-    });
-    $("#saveAccountValues").click(function() { //save button
-      let firstName = $("#firstNameInput").val(); //get new first name
-      let lastName = $("#lastNameInput").val(); //get new last name
-      let email = $("#emailInput").val(); //get new email
-      let interests = $("#interestsInput").val(); //get new interests
-      $.ajax({ //send ajax request to save changes
-        url: "/user/edit", //edit user route
-        type: "GET", //get request
-        data: { //data to send
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          interests: interests
-        },
-        success: function(data) { //on success
-          if (data.success) { //if success
-            $("#firstName").text(firstName); //change first name
-            $("#lastName").text(lastName); //change last name
-            $("#email").text(email); //change email
-            $("#interests").text(interests); //change interests
-            $("#editAccountValues").show(); //show edit button
-            $("#saveAccountValues").hide(); //hide save button
-            Swal.fire({ //show success alert
-              title: "Success",
-              text: "Your changes have been saved.",
-              icon: "success",
-              confirmButtonText: "Ok"
-            });
-          } else {
+  function initPage() { //function to initialize page
+    $("#saveAccountValues").hide(); //hide save button
+    
+    let account = $("#accountInfo").data("account"); //get account info from data-account attribute
+    if (account.isSelfEdit) { //if user is viewing their own profile
+      $("#profileHeader").text("My Profile"); //change header to "My Profile"
+      $("#editAccountValues").click(function() { //edit button
+        $("#firstName").html(`<input type="text" id="firstNameInput" name="firstNameInput" value="${account.firstName}">`); //change to input
+        $("#lastName").html(`<input type="text" id="lastNameInput" name="lastNameInput" value="${account.lastName}">`); //change to input
+        $("#email").html(`<input type="text" id="emailInput" name="emailInput" value="${account.email}">`); //change to input
+        $("#interests").html(`<input type="text" id="interestsInput" name="interestsInput" value="${account.interests}">`); //change to input
+        $("#editAccountValues").hide(); //hide edit button
+        $("#newProfilePic").hide(); //hide edit profile picture button
+        $("#saveAccountValues").show(); //show save button
+      });
+      $("#saveAccountValues").click(function() { //save button
+        let firstName = $("#firstNameInput").val(); //get new first name
+        let lastName = $("#lastNameInput").val(); //get new last name
+        let email = $("#emailInput").val(); //get new email
+        let interests = $("#interestsInput").val(); //get new interests
+        $.ajax({ //send ajax request to save changes
+          url: "/user/edit", //edit user route
+          type: "GET", //get request
+          data: { //data to send
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            interests: interests
+          },
+          success: function(data) { //on success
+            if (data.success) { //if success
+              $("#firstName").text(firstName); //change first name
+              $("#lastName").text(lastName); //change last name
+              $("#email").text(email); //change email
+              $("#interests").text(interests); //change interests
+              $("#editAccountValues").show(); //show edit button
+              $("#saveAccountValues").hide(); //hide save button
+              Swal.fire({ //show success alert
+                title: "Success",
+                text: "Your changes have been saved.",
+                icon: "success",
+                confirmButtonText: "Ok"
+              });
+            } else {
+              Swal.fire({ //show error alert
+                title: "Error",
+                text: data.error,
+                icon: "error",
+                confirmButtonText: "Ok"
+              });
+            }
+          },
+          error: function(err) { //on error
             Swal.fire({ //show error alert
               title: "Error",
-              text: data.error,
+              text: "An error occurred while trying to save your changes.",
               icon: "error",
               confirmButtonText: "Ok"
-            });
+            })
           }
-        },
-        error: function(err) { //on error
-          Swal.fire({ //show error alert
-            title: "Error",
-            text: "An error occurred while trying to save your changes.",
-            icon: "error",
-            confirmButtonText: "Ok"
-          })
-        }
+        });
       });
-    });
     $("#logout").click(function() { //logout button
       $.ajax({ //send ajax request to logout
         url: "/user/logout",
@@ -170,6 +165,7 @@ function initPage() { //function to initialize page
     $("#newProfilePic").hide();//hide edit profile pic button
 
   }
+  $("#profileIcon").attr("src", account.userProfileImage); //set profile picture
   $("#username").text(account.username); //set username
   $("#firstName").text(account.firstName); //set first name
   $("#lastName").text(account.lastName); //set last name
@@ -185,6 +181,7 @@ initPage(); //call function to initialize page
 
 
 <style>
+
   #profileHeader {
     color: #487CB4;;
     margin: auto;
@@ -221,7 +218,6 @@ initPage(); //call function to initialize page
     margin-top: 5%;
     margin-left: 1%;
   }
-
   .task {
     display: inline-block;
     margin-left: 20px;
