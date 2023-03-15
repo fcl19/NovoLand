@@ -32,13 +32,15 @@ module.exports = {
     new_event: function(req, res){
         res.view('new_event');
     },
+    aboutUs: function(req, res){
+        res.view('aboutUs');
+},
 
     orientation: function(req,res){
         res.view('orientation');
 },
     edit_profile_pic: function(req, res){
         res.view('edit_profile_pic');
-
     }
 
 
